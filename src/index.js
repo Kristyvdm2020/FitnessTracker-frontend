@@ -10,16 +10,13 @@ const App = ()=> {
     <div>
       <h1>Front End</h1>
       <nav>
-    {/* <Link to='/fetch'> Register </Link> */}
+    <Link to='/fetch'> Register </Link>
     {/* <Link></Link> */}
     {/* <Link></Link> */}
     {/* <Link></Link> */}
       </nav>
         {/* <Routes>
-      <Route path='/register' element = {< ViewRegister />}> </Route>
-      <Route path='/register' element = {}></Route>
-      <Route path='/register' element = {}></Route>
-      <Route path='/register' element = {}></Route>
+      <Route path='/register' element = {< ViewRegister />}> 
         </Routes> */}
     </div>
   );
