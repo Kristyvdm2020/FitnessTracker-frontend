@@ -30,13 +30,17 @@ const loginUser = (username, password) => {
         })
     }).then(response => response.json())
         .then(result => {
-            console.log(result);
+            //console.log(result.token);
+            const token = result.token;
+            window.localStorage.setItem('token', token);
         })
         .catch(console.error);
 };
 
 //GET /api/users/me
-const exchangeTokenForUser = (token) => {
+//Working to figure out where to put the user
+const exchangeTokenForUser = () => {
+    const token = window.localStorage.getItem('token');
     fetch('http://fitnesstrac-kr.herokuapp.com/api/users/me', {
         headers: {
             'Content-Type': 'application/json',
@@ -44,22 +48,41 @@ const exchangeTokenForUser = (token) => {
         },
     }).then(response => response.json())
         .then(result => {
-            console.log(result);
+            //console.log(result.username);
+            return result;
         })
         .catch(console.error);
 };
 
 //GET /api/users/:username/routines
+//uses token; need to fix to check if authorization header has token
 const fetchUsernameRoutines = (username) => {
-    fetch(`http://fitnesstrac-kr.herokuapp.com/api/users/${username}/routines`, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    }).then(response => response.json())
-        .then(result => {
-            console.log(result);
-        })
-        .catch(console.error);
+    const token = window.localStorage.getItem('token');
+    
+    if (token) {
+        const user = exchangeTokenForUser();
+        fetch(`http://fitnesstrac-kr.herokuapp.com/api/users/${username}/routines`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        }).then(response => response.json())
+            .then(result => {
+                console.log(result);
+            })
+            .catch(console.error);
+    } else {
+
+        fetch(`http://fitnesstrac-kr.herokuapp.com/api/users/${username}/routines`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then(response => response.json())
+            .then(result => {
+                console.log(result);
+            })
+            .catch(console.error);
+    }
 }
 
 //Activities fetch requests
@@ -69,6 +92,27 @@ const fetchAllActivities = () => {
         headers: {
             'Content-Type': 'application/json',
         },
+    }).then(response => response.json())
+        .then(result => {
+            console.log(result);
+            return result;
+        })
+        .catch(console.error);
+};
+
+//POST /api/activities (*)
+const createActivity = (name, description) => {
+    const token = window.localStorage.getItem("token");
+    fetch('http://fitnesstrac-kr.herokuapp.com/api/activities', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            name: name,
+            description: description
+        })
     }).then(response => response.json())
         .then(result => {
             console.log(result);
@@ -105,4 +149,12 @@ const fetchAllPublicRoutines = () => {
 
 module.exports = 
 { 
-    registerUser, loginUser, exchangeTokenForUser, fetchUsernameRoutines, fetchAllActivities, fetchRoutinesFeaturingActivity, fetchAllPublicRoutines, };
+    registerUser, 
+    loginUser, 
+    exchangeTokenForUser, 
+    fetchUsernameRoutines, 
+    fetchAllActivities, 
+    createActivity,
+    fetchRoutinesFeaturingActivity, 
+    fetchAllPublicRoutines, 
+};
