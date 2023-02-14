@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { loginUser } from './api/fetch';
+import { ViewRegister } from '../components/header/header';
 
 const App = ()=> {
  loginUser("Kristy", "12345678");
@@ -8,19 +9,17 @@ const App = ()=> {
     <div>
       <h1>Front End</h1>
       <nav>
-        <Link>
-    <Link></Link>
-    <Link></Link>
-    <Link></Link>
-    <Link></Link>
-        </Link>
+    {/* <Link to='/fetch'> Register </Link> */}
+    {/* <Link></Link> */}
+    {/* <Link></Link> */}
+    {/* <Link></Link> */}
       </nav>
-        <Routes>
+        {/* <Routes>
+      <Route path='/register' element = {< ViewRegister }> </Route>
       <Route path='/register' element = {}></Route>
       <Route path='/register' element = {}></Route>
       <Route path='/register' element = {}></Route>
-      <Route path='/register' element = {}></Route>
-        </Routes>
+        </Routes> */}
     </div>
   );
 };
