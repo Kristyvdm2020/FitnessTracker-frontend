@@ -1,14 +1,10 @@
 import React from 'react';
-import { Routes, Route, HashRouter} from 'react-router-dom';
+import { Link, Routes, Route, HashRouter} from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { loginUser } from './api/fetch';
-import { Navbar } from './nav';
 
 const App = ()=> {
  loginUser("Kristy", "12345678");
-
-
- Navbar();
 
   return (
     <div>
@@ -18,10 +14,11 @@ const App = ()=> {
           <Link to='/Activities'>Activities</Link>
           <Link to='/Routines'>Routines</Link>
           <Link to='/Login'>Login</Link>
+          <Link to='/Register'>Login</Link>
         </nav>
       </header>
 
-      <Route path='/Register' element={<Register />} />
+      {/* <Route path='/Register' element={<Register />} /> */}
 
     </div>
   
