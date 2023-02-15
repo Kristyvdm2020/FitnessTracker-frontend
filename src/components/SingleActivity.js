@@ -8,14 +8,17 @@ const SingleActivity = (props) => {
     console.log(activity);
 
     if(!activity) {
-        return null;
+        return (
+            <h1>Oops! Page Not Found!</h1>
+        )
+    } else {
+        return (
+            <div id='singleActivity'>
+                <h1><Link to='/activities'>{activity.name}</Link></h1>
+                <h2>{activity.description}</h2>
+            </div>
+        )
     }
-    return (
-        <div id='singleActivity'>
-            <h1><Link to='/activities'>{activity.name}</Link></h1>
-            <h2>{activity.description}</h2>
-        </div>
-    )
 }
 
 export default SingleActivity;
