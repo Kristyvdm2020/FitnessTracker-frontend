@@ -24,6 +24,23 @@ export default AllActivities;
 
 //import AllActivities from './components/AllActivities';
 // const [activities, setActivities] = useState([]);
+
+//const fetchAllActivities = () => {
+//     fetch('http://fitnesstrac-kr.herokuapp.com/api/activities', {
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//     }).then(response => response.json())
+//         .then(result => {
+//             console.log(result);
+//             setActivities(result);
+//         })
+//         .catch(console.error);
+// };
+
+// useEffect(() => {
+//     fetchAllActivities();
+//   }, [])
 //<Route path='/activities' element={
 //          <AllActivities activities={activities}/>
 //       } />
