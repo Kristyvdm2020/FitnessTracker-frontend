@@ -28,3 +28,9 @@ export default SingleActivity;
 //<Route path='/activities/:id' element={
 //          <SingleActivity activities={activities}/>
 //       } />
+
+// #singleActivity {
+//     background-color: greenyellow;
+//     border-radius: 1rem;
+//     margin: 1rem;
+//   }
