@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, Routes, Route, HashRouter} from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { loginUser } from './api/fetch';
+import { ViewRegister } from './components/ViewRegister';
+import { ViewLogin } from './components/ViewLogin';
 
 const App = ()=> {
  loginUser("Kristy", "12345678");
@@ -14,12 +16,13 @@ const App = ()=> {
           <Link to='/Activities'>Activities</Link>
           <Link to='/Routines'>Routines</Link>
           <Link to='/Login'>Login</Link>
-          <Link to='/Register'>Login</Link>
+          <Link to='/Register'>Register</Link>
         </nav>
       </header>
-
-      {/* <Route path='/Register' element={<Register />} /> */}
-
+      <Routes>
+        <Route path='/Register' element={<ViewRegister />} />
+        <Route path='/Login' element={<ViewLogin />} />
+      </Routes>
     </div>
   
 
