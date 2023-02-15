@@ -22,33 +22,3 @@ const SingleActivity = (props) => {
 }
 
 export default SingleActivity;
-
-//import SingleActivity from './components/SingleActivity';
-//// const [activities, setActivities] = useState([]);
-
-//const fetchAllActivities = () => {
-//     fetch('http://fitnesstrac-kr.herokuapp.com/api/activities', {
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//     }).then(response => response.json())
-//         .then(result => {
-//             console.log(result);
-//             setActivities(result);
-//         })
-//         .catch(console.error);
-// };
-
-// useEffect(() => {
-//     fetchAllActivities();
-//   }, [])
-
-//<Route path='/activities/:id' element={
-//          <SingleActivity activities={activities}/>
-//       } />
-
-// #singleActivity {
-//     background-color: greenyellow;
-//     border-radius: 1rem;
-//     margin: 1rem;
-//   }
