@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, Routes, Route, HashRouter} from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { loginUser } from './api/fetch'; //this is only here right now for getting a token for development
-//import { fetchAllActivities } from './api/fetch'
+import { fetchAllActivities } from './api/fetch'
 import { ViewRegister } from './components/ViewRegister';
 import { ViewLogin } from './components/ViewLogin';
 import AllActivities from './components/AllActivities';
@@ -14,27 +14,12 @@ import AllMyRoutines from './components/AllMyRoutines';
 import Home from './components/Home';
 
 const App = ()=> {
- loginUser("Kristy", "12345678");
+ //loginUser("Kristy", "12345678");
  const [activities, setActivities] = useState([]);
  const [routines, setRoutines] = useState([]);
  const [token, setToken] = useState('');
  const [user, setUser] = useState({});
  const [myRoutines, setMyRoutines] = useState([]);
-
-
-
- const fetchAllActivities = () => {
-    fetch('http://fitnesstrac-kr.herokuapp.com/api/activities', {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    }).then(response => response.json())
-        .then(result => {
-            console.log(result);
-            setActivities(result);
-        })
-        .catch(console.error);
-};
 
   const fetchAllRoutines = () => {
      fetch('https://fitnesstrac-kr.herokuapp.com/api/routines', {
@@ -69,6 +54,12 @@ const App = ()=> {
     }
   }, [user])
 
+  const loadData = async() => {
+    const allActivities = await fetchAllActivities();
+    setActivities(allActivities);
+    //hoping to add fetchAllRoutines and fetchUsernameRoutines
+  }
+
  useEffect(() => {
    const checkToken = () => {
     const token = window.localStorage.getItem('token');
@@ -88,7 +79,7 @@ const App = ()=> {
     }
    };
    checkToken();
-   fetchAllActivities();
+   loadData();
    fetchAllRoutines();
    }, [])
 
