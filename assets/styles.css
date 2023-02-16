@@ -1,3 +1,23 @@
 body {
   font-family: verdana;
 }
+
+#activities-collection {
+  font-size: 1rem;
+}
+
+#activities {
+  list-style-type: none;
+}
+
+#activities>li {
+  /* background-color: greenyellow;
+  border-radius: 1rem; */
+  margin: 1rem;
+}
+
+#singleActivity {
+  background-color: greenyellow;
+  border-radius: 1rem;
+  margin: 1rem;
+}
