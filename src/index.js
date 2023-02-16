@@ -36,6 +36,7 @@ const App = ()=> {
  
  const fetchUsernameRoutines = (username) => {
     const token = window.localStorage.getItem('token');
+    //sandra is our sample for seeing any routines right now
      fetch(`http://fitnesstrac-kr.herokuapp.com/api/users/sandra/routines`, {
        headers: {
          'Content-Type': 'application/json',
@@ -112,7 +113,7 @@ const App = ()=> {
             <AllRoutines routines={routines} />
         } />
         <Route path='/myroutines/:id' element={
-            <MyOneRoutine myRoutines={myRoutines} />
+            <MyOneRoutine myRoutines={myRoutines} activities={activities} setActivities={setActivities}/>
         } />
         <Route path='/myroutines' element={
             <AllMyRoutines myRoutines={myRoutines} />
