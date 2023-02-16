@@ -6,5 +6,4 @@ return (
     <h1>Tell us about your routine!</h1>
 
 )
-
 }

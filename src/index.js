@@ -14,7 +14,7 @@ import AllMyRoutines from './components/AllMyRoutines';
 import Home from './components/Home';
 
 const App = ()=> {
- //loginUser("Kristy", "12345678");
+ loginUser("Kristy", "12345678");
  const [activities, setActivities] = useState([]);
  const [routines, setRoutines] = useState([]);
  const [token, setToken] = useState('');
@@ -36,7 +36,7 @@ const App = ()=> {
  
  const fetchUsernameRoutines = (username) => {
     const token = window.localStorage.getItem('token');
-     fetch(`http://fitnesstrac-kr.herokuapp.com/api/users/${username}/routines`, {
+     fetch(`http://fitnesstrac-kr.herokuapp.com/api/users/sandra/routines`, {
        headers: {
          'Content-Type': 'application/json',
          'Authorization': `Bearer ${token}`
@@ -50,6 +50,7 @@ const App = ()=> {
 }
   useEffect(()=> {
     if(user.username) {
+      console.log(user)
       fetchUsernameRoutines(user.username);
     }
   }, [user])
@@ -111,7 +112,7 @@ const App = ()=> {
             <AllRoutines routines={routines} />
         } />
         <Route path='/myroutines/:id' element={
-            <MyOneRoutine routines={routines} />
+            <MyOneRoutine myRoutines={myRoutines} />
         } />
         <Route path='/myroutines' element={
             <AllMyRoutines myRoutines={myRoutines} />
