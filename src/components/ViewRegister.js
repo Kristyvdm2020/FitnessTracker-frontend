@@ -1,6 +1,5 @@
 import React, {useState} from "react";
-import { registerUser } from "../../src/api/fetch";
-
+import { fetchRegister } from "../api/fetch"
 
 export const ViewRegister = () => { 
     const [username, setUsername] = useState('');
@@ -8,7 +7,7 @@ export const ViewRegister = () => {
 
     return (
         <div className="register">
-            <h1>Register</h1>
+            <h1>Create your WERKIT account!</h1>
             <form onSubmit={async(ev) => { 
         try {
             ev.preventDefault();
@@ -40,34 +39,3 @@ export const ViewRegister = () => {
         </div>
     )
 }
-
-export const ViewLogin = () => {
-
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-
-
-    return (
-
-<div className="login">
-    <h1>Login</h1>
-    <form>
-        <input
-            placeholder="username"
-            value={username}
-            onChange={(ev) => setUsername(ev.target.value)}
-            />
-            <input
-            placeholder="password"
-            type={'password'}
-            value={password}
-            onChange={(ev) => setPassword(ev.target.value)}
-            />
-
-            
-        <button disabled ={!username || !password}>Log In</button> 
-        {/* Grays out button if there is no input ^^^^ */}
-
-    </form>
-</div>
-        )};
