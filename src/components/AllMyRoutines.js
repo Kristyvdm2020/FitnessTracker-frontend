@@ -1,11 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 const AllMyRoutines = (props) => {
     const { myRoutines } = props;
-    console.log(myRoutines);
+    console.log(props);
     return (
-        <div>My Routines</div>
+        <div id='routines-collection'>
+            <ul id='routines'>
+                {
+                    myRoutines.map(routine => {
+                        return (
+                            <li key={routine.id}>
+                                <Link to={`/routines/${routine.id}`}>{routine.name}</Link></li>
+                        )
+                    })
+                }
+            </ul>
+        </div>
     )
 }
 

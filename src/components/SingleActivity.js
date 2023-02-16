@@ -5,7 +5,7 @@ const SingleActivity = (props) => {
     const { activities } = props;
     const id = Number(useParams().id);
     const activity = activities.find(activity => activity.id === id);
-    console.log(activity);
+    //console.log(activity);
 
     if(!activity) {
         return (
