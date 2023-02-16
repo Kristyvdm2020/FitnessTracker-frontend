@@ -6,6 +6,10 @@ import { ViewRegister } from './components/ViewRegister';
 import { ViewLogin } from './components/ViewLogin';
 import AllActivities from './components/AllActivities';
 import SingleActivity from './components/SingleActivity';
+import SingleRoutine from './components/SingleRoutine';
+import AllRoutines from './components/AllRoutines';
+import MyOneRoutine from './components/MyOneRoutine';
+import AllMyRoutines from './components/AllMyRoutines';
 
 const App = ()=> {
  loginUser("Kristy", "12345678");
@@ -28,6 +32,25 @@ useEffect(() => {
     fetchAllActivities();
   }, [])
 
+  const [routines, setRoutines] = useState([]);
+
+  const fetchAllRoutines = () => {
+     fetch('https://fitnesstrac-kr.herokuapp.com/api/routines', {
+         headers: {
+             'Content-Type': 'application/json',
+         },
+     }).then(response => response.json())
+         .then(result => {
+             console.log(result);
+             setRoutines(result);
+         })
+         .catch(console.error);
+ };
+ 
+ useEffect(() => {
+     fetchAllRoutines();
+   }, [])
+
   return (
     <div>
       <header>
@@ -47,6 +70,18 @@ useEffect(() => {
         } />
         <Route path='/activities' element={
           <AllActivities activities={activities} />
+        } />
+        <Route path='/routines' element={
+            <SingleRoutine routines={routines} />
+        } />
+        <Route path='/routines' element={
+            <AllRoutines routines={routines} />
+        } />
+        <Route path='/routines' element={
+            <AllMyRoutines routines={routines} />
+        } />
+        <Route path='/routines' element={
+            <MyOneRoutine routines={routines} />
         } />
       </Routes>
     </div>

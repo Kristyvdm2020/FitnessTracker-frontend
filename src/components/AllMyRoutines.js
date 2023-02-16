@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const AllMyRoutines = () => {
+const AllMyRoutines = (props) => {
     return (
         <div>My Routines</div>
     )

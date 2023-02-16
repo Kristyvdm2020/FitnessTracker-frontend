@@ -15,7 +15,7 @@ const SingleRoutine = (props) => {
         return (
             <div id='singleRoutine'>
                 <h1><Link to='/routines'>{routine.name}</Link></h1>
-                <h2>{routine.description}</h2>
+                <h2>{routine.goal}</h2>
             </div>
         )
     }

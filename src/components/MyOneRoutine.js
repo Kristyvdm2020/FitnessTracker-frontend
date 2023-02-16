@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const MyOneRoutine = () => {
+const MyOneRoutine = (props) => {
     return (
         <div>My One Routine</div>
     )
