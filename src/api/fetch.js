@@ -56,48 +56,38 @@ const exchangeTokenForUser = () => {
 
 //GET /api/users/:username/routines
 //uses token; need to fix to check if authorization header has token
-const fetchUsernameRoutines = (username) => {
-    const token = window.localStorage.getItem('token');
-    
-    if (token) {
-        const user = exchangeTokenForUser();
-        fetch(`http://fitnesstrac-kr.herokuapp.com/api/users/${username}/routines`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-        }).then(response => response.json())
-            .then(result => {
-                console.log(result);
-            })
-            .catch(console.error);
-    } else {
-
-        fetch(`http://fitnesstrac-kr.herokuapp.com/api/users/${username}/routines`, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }).then(response => response.json())
-            .then(result => {
-                console.log(result);
-            })
-            .catch(console.error);
-    }
-}
-
-//Activities fetch requests
-//GET /api/activities 
-const fetchAllActivities = () => {
-    fetch('http://fitnesstrac-kr.herokuapp.com/api/activities', {
+const fetchUsernameRoutines = (username, token) => {
+    fetch(`http://fitnesstrac-kr.herokuapp.com/api/users/${username}/routines`, {
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
     }).then(response => response.json())
         .then(result => {
             console.log(result);
-            return result;
         })
         .catch(console.error);
+}
+
+//Activities fetch requests
+//GET /api/activities 
+const fetchAllActivities = async() => {
+    try {
+        let response = await fetch('http://fitnesstrac-kr.herokuapp.com/api/activities', {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    let result = await response.json();
+    if(result.error) {
+        throw result.error;
+    } 
+    console.log(result);
+    return result;
+    } catch (error) {
+        console.error("Uh oh, trouble fetching Activities");
+    }
+    
 };
 
 //POST /api/activities (*)
