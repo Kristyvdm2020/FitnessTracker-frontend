@@ -1,7 +1,7 @@
 import React, {useState} from "react";
+import { loginUser } from "../api/fetch";
 
-
-export const ViewLogin = () => {
+export const ViewLogin = ({setToken}) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -9,9 +9,20 @@ export const ViewLogin = () => {
 
     return (
 
-<div className="login">
+<div className='body-container' id="login">
     <h1>Login to WerkIT</h1>
-    <form>
+    <form onSubmit={async(ev) => {
+        
+        try {
+            ev.preventDefault();
+            const token = await loginUser(username, password);
+            setToken(token);
+            console.log('login success');
+        }
+        catch (error){
+            console.error(error);
+        }
+    }}>
         <input
             placeholder="username"
             value={username}

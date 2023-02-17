@@ -5,7 +5,7 @@ const AllActivities = (props) => {
     const { activities } = props;
 
     return (
-        <div id='activities-collection'>
+        <div className='body-container' id='activities-collection'>
             <ul id='activities'>
                 {
                     activities.map(activity => {

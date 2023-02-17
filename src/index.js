@@ -14,11 +14,13 @@ import AllMyRoutines from './components/AllMyRoutines';
 import Home from './components/Home';
 
 const App = ()=> {
+
   loginUser("Kristy", "12345678");
   const [activities, setActivities] = useState([]);
   const [routines, setRoutines] = useState([]);
   const [user, setUser] = useState({});
   const [myRoutines, setMyRoutines] = useState([]);
+
 
 
   const loadUsernameRoutines = async () => {
@@ -54,20 +56,37 @@ const App = ()=> {
   }, [])
 
   return (
-    <div>
+    <div className='container'>
       <header>
-        <nav>
-          <Link to='/'>Home</Link>
-          <Link to='/Activities'>Activities</Link>
-          <Link to='/Routines'>Routines</Link>
-          <Link to='/MyRoutines'>My Routines</Link>
-          <Link to='/Login'>Login</Link>
-          <Link to='/Register'>Register</Link>
-        </nav>
+
+        <div className='top-container'>
+          <div className='user-display'>
+            <div className='icon'></div><p>Hi {user.username}!</p><button className='logout-btn'>Logout</button>
+          </div>
+          <div className='login-register'>
+            <Link to='/Login'><button className='login-btn'>Login</button></Link>
+            <Link to='/Register'><button className='login-btn'>Register</button></Link>
+          </div>
+        </div>
+        <div className='logo-nav'>       
+          <div className='logo'>
+              <p>Werkit</p>
+            </div>
+          <nav>
+            <Link to='/'>HOME</Link>
+            <Link to='/Activities'>ACTIVITIES</Link>
+            <Link to='/Routines'>ROUTINES</Link>
+            <Link to='/MyRoutines'>MY ROUTINES</Link>
+
+          </nav>
+        </div>  
+
       </header>
       <Routes>
-        <Route path='/Register' element={<ViewRegister />} />
-        <Route path='/Login' element={<ViewLogin />} />
+        <Route path='/Register' element={<ViewRegister setToken={setToken} />} />
+        <Route path='/Login' element={<ViewLogin setToken={setToken} />} />
+        <Route path='/Activity' element={<CreateActivity token ={token}/>} />
+        {/* <Route path='/Activity' element={<CreateRoutine />} /> */}
         <Route path='/activities/:id' element={
           <SingleActivity activities={activities} />
         } />
