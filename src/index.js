@@ -83,9 +83,9 @@ const App = ()=> {
 
       </header>
       <Routes>
-        <Route path='/Register' element={<ViewRegister setToken={setToken} />} />
-        <Route path='/Login' element={<ViewLogin setToken={setToken} />} />
-        <Route path='/Activity' element={<CreateActivity token ={token}/>} />
+        <Route path='/Register' element={<ViewRegister />} />
+        <Route path='/Login' element={<ViewLogin />} />
+        {/* <Route path='/Activity' element={<CreateActivity />} /> */}
         {/* <Route path='/Activity' element={<CreateRoutine />} /> */}
         <Route path='/activities/:id' element={
           <SingleActivity activities={activities} />
@@ -100,7 +100,7 @@ const App = ()=> {
           <AllRoutines routines={routines} />
         } />
         <Route path='/myroutines/:id' element={
-          <MyOneRoutine myRoutines={myRoutines} activities={activities} setMyRoutines={setMyRoutines} />
+          <MyOneRoutine user={user} myRoutines={myRoutines} activities={activities} setMyRoutines={setMyRoutines} />
         } />
         <Route path='/myroutines' element={
           <AllMyRoutines myRoutines={myRoutines} />

@@ -1,25 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { attachActivityToRoutine } from '../api/fetch';
+import { attachActivityToRoutine, fetchUsernameRoutines } from '../api/fetch';
 
 const MyOneRoutine = (props) => {
-    const { myRoutines, activities } = props;
+    const { user, myRoutines, activities, setMyRoutines } = props;
     const [selectedActivityId, setSelectedActivityId] = useState('');
     const [count, setCount] = useState('');
     const [duration, setDuration] = useState('');
     const id  = Number(useParams().id);
-    const routine = myRoutines.find(routine => routine.id === id);
+    let routine = myRoutines.find(routine => routine.id === id);
 
     const addActivity = async(ev) => {
         ev.preventDefault();
-        const activity = await attachActivityToRoutine(id, selectedActivityId, count, duration); 
-        //need to figure out how to refresh the list and make it appear on the page....
-        //it does add the activity to the page.
+        const response = await attachActivityToRoutine(id, selectedActivityId, count, duration);
+        console.log(response);
+        if (!response) {
+            const allMyRoutines = await fetchUsernameRoutines(user.username);
+            setMyRoutines(allMyRoutines);
+            routine = myRoutines.find(routine => routine.id === id);
+            clearForm();
+        }
+    }
+
+    const clearForm = () => {
+        setSelectedActivityId('');
+        setCount('');
+        setDuration('');
     }
 
     if(!routine) {
         return (
-            <h1>Oops! Page Not Found!</h1>
+            <h1>You have not created any routines</h1>
         )
     } else {
         return(
@@ -38,10 +49,7 @@ const MyOneRoutine = (props) => {
                         <select
                             name='Activity'
                             value={selectedActivityId}
-                            onChange={(ev) => {
-                                console.log(ev.target.value)
-                                setSelectedActivityId(Number(ev.target.value))
-                            }}>
+                            onChange={(ev) => {setSelectedActivityId(Number(ev.target.value))}}>
                             <option value='any'></option>
                             {
                                 activities.map(activity => {
@@ -62,7 +70,7 @@ const MyOneRoutine = (props) => {
                             onChange={(ev) => setDuration(Number(ev.target.value))}
                         />
 
-                        <button disabled={selectedActivityId === '' || count === '' || duration === ''}>
+                        <button disabled={selectedActivityId === '' || count === '' || duration === ''} type="submit">
                             Add Activity</button>
                     </form>
                 </div>

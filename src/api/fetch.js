@@ -59,7 +59,6 @@ const fetchAllRoutines = async () => {
 const fetchUsernameRoutines = async(username) => {
     try {
         const token = window.localStorage.getItem('token');
-        //sandra is our sample for seeing any routines right now. Just replace ${username} with sandra
         let response = await fetch(`http://fitnesstrac-kr.herokuapp.com/api/users/${username}/routines`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -202,7 +201,6 @@ const createRoutine = async (name, goal, isPublic) => {
 
 //POST /api/routines/:routineId/activities 
 const attachActivityToRoutine = async(routineId, activityId, count, duration) => {
-    console.log("here are the params", activityId, count, duration);
     try {
         let response = await fetch(`http://fitnesstrac-kr.herokuapp.com/api/routines/${routineId}/activities`, {
             method: "POST",
