@@ -1,150 +1,186 @@
-//User fetch requests
-//POST /api/users/register
-const registerUser = (username, password) => {
-    fetch('http://fitnesstrac-kr.herokuapp.com/api/users/register', {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password
-        })
-      }).then(response => response.json())
-        .then(result => {
-          console.log(result);
-        })
-        .catch(console.error);
-};
-
-//POST /api/users/login 
-const loginUser = (username, password) => {
-    fetch('http://fitnesstrac-kr.herokuapp.com/api/users/login', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            username: username,
-            password: password
-        })
-    }).then(response => response.json())
-        .then(result => {
-            //console.log(result.token);
-            const token = result.token;
-            window.localStorage.setItem('token', token);
-        })
-        .catch(console.error);
-};
-
+//ready API functions actively used in our app
 //GET /api/users/me
 //Working to figure out where to put the user
-const exchangeTokenForUser = () => {
-    const token = window.localStorage.getItem('token');
-    fetch('http://fitnesstrac-kr.herokuapp.com/api/users/me', {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-    }).then(response => response.json())
-        .then(result => {
-            //console.log(result.username);
-            return result;
-        })
-        .catch(console.error);
-};
-
-//GET /api/users/:username/routines
-//uses token; need to fix to check if authorization header has token
-const fetchUsernameRoutines = (username, token) => {
-    fetch(`http://fitnesstrac-kr.herokuapp.com/api/users/${username}/routines`, {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-    }).then(response => response.json())
-        .then(result => {
-            console.log(result);
-        })
-        .catch(console.error);
+const getUser = async (token) => {
+    try {
+        let response = await fetch('http://fitnesstrac-kr.herokuapp.com/api/users/me', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        });
+        let result = response.json();
+        if (result.error) {
+            throw result.error;
+        }
+        return result;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
-//Activities fetch requests
 //GET /api/activities 
-const fetchAllActivities = async() => {
+const fetchAllActivities = async () => {
     try {
         let response = await fetch('http://fitnesstrac-kr.herokuapp.com/api/activities', {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-    let result = await response.json();
-    if(result.error) {
-        throw result.error;
-    } 
-    console.log(result);
-    return result;
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        let result = await response.json();
+        if (result.error) {
+            throw result.error;
+        }
+        return result;
     } catch (error) {
         console.error("Uh oh, trouble fetching Activities");
     }
-    
 };
 
+//GET /api/routines
+const fetchAllRoutines = async () => {
+    try {
+        let response = await fetch('http://fitnesstrac-kr.herokuapp.com/api/routines', {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        let result = await response.json();
+        if (result.error) {
+            throw result.error;
+        }
+        return result;
+    } catch (error) {
+        console.error("Uh oh, trouble fetching Routines");
+    }
+};
+
+//GET /api/users/:username/routines
+const fetchUsernameRoutines = async(username) => {
+    try {
+        const token = window.localStorage.getItem('token');
+        //sandra is our sample for seeing any routines right now. Just replace ${username} with sandra
+        let response = await fetch(`http://fitnesstrac-kr.herokuapp.com/api/users/${username}/routines`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        });
+        let result = response.json();
+        if (result.error) {
+            throw result.error;
+        }
+        return result;
+    } catch (error) {
+        console.error("Uh oh, trouble fetching ", username, " Routines");
+    }
+}
+
+
+///----------API FUNCTIONS THAT ARE NOT ACTIVELY USED ARE BELOW THIS LINE, but can be used ----------------------
+//User fetch requests
+//POST /api/users/register
+const registerUser = async (username, password) => {
+    try {
+        let response = await fetch('http://fitnesstrac-kr.herokuapp.com/api/users/register', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        })
+        let result = response.json();
+        if (result.error) {
+            throw result.error;
+        }
+        return result;
+    } catch (error) {
+        console.error("Uh oh, trouble registering user");
+    }
+};
+
+//POST /api/users/login 
+const loginUser = async(username, password) => {
+    try {
+        let response = await fetch('http://fitnesstrac-kr.herokuapp.com/api/users/login', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        })
+          let result = response.json();
+          if (result.error) {
+            throw result.error;
+        }
+        const token = result.token;
+        window.localStorage.setItem('token', token);
+        return result;
+    } catch (error) {
+        console.error("Uh oh, trouble logging in user");
+    }
+};
+
+
+//Activities fetch requests
 //POST /api/activities (*)
-const createActivity = (name, description) => {
-    const token = window.localStorage.getItem("token");
-    fetch('http://fitnesstrac-kr.herokuapp.com/api/activities', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({
-            name: name,
-            description: description
+const createActivity = async (name, description) => {
+    try {
+        const token = window.localStorage.getItem("token");
+        let response = await fetch('http://fitnesstrac-kr.herokuapp.com/api/activities', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                name: name,
+                description: description
+            })
         })
-    }).then(response => response.json())
-        .then(result => {
-            console.log(result);
-        })
-        .catch(console.error);
+        let result = response.json();
+        if (result.error) {
+            throw result.error;
+        }
+        return result;
+    } catch (error) {
+        console.error("Uh oh, trouble creating activity");
+    }
 }
 
 //GET /api/activities/:activityId/routines
-const fetchRoutinesFeaturingActivity = (activityId) => {
-    fetch(`http://fitnesstrac-kr.herokuapp.com/api/activities/${activityId}/routines`, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    }).then(response => response.json())
-        .then(result => {
-            console.log(result);
+const fetchRoutinesFeaturingActivity = async (activityId) => {
+    try {
+        let response = await fetch(`http://fitnesstrac-kr.herokuapp.com/api/activities/${activityId}/routines`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
         })
-        .catch(console.error);
+        let result = response.json();
+        if (result.error) {
+            throw result.error;
+        }
+        return result;
+    } catch (error) {
+        console.error("Uh oh, trouble fetching routines featuring this activity");
+    }
 };
 
-//Routines fetch requests
-//GET /api/routines
-const fetchAllPublicRoutines = () => {
-    fetch('http://fitnesstrac-kr.herokuapp.com/api/routines', {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    }).then(response => response.json())
-        .then(result => {
-            console.log(result);
-        })
-        .catch(console.error);
-};
 
 module.exports = 
 { 
     registerUser, 
     loginUser, 
-    exchangeTokenForUser, 
+    getUser, 
     fetchUsernameRoutines, 
     fetchAllActivities, 
     createActivity,
     fetchRoutinesFeaturingActivity, 
-    fetchAllPublicRoutines, 
+    fetchAllRoutines, 
 };
