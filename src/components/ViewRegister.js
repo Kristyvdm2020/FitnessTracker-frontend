@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import { fetchRegister } from "../api/fetch"
+import { registerUser } from "../api/fetch"
 
-export const ViewRegister = () => { 
+export const ViewRegister = ({setToken}) => { 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -11,9 +11,9 @@ export const ViewRegister = () => {
             <form onSubmit={async(ev) => { 
         try {
             ev.preventDefault();
-            const token = await fetchRegister(username, password);
-            setToken(token);
-
+            const token = await registerUser(username, password);
+           setToken(token);
+           console.log('register success')
             // const redirectlogin = () => {
             // }
 
@@ -34,7 +34,7 @@ export const ViewRegister = () => {
           value={password}
           onChange={(ev) => setPassword(ev.target.value)}
         />
-    <button disabled ={!username || !password}>Login</button>
+    <button disabled ={!username || !password}>Create Account</button>
 </form>
         </div>
     )
