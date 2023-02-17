@@ -9,7 +9,7 @@ const getUser = async (token) => {
                 'Authorization': `Bearer ${token}`
             },
         });
-        let result = response.json();
+        let result = await response.json();
         if (result.error) {
             throw result.error;
         }
@@ -66,7 +66,7 @@ const fetchUsernameRoutines = async(username) => {
                 'Authorization': `Bearer ${token}`
             },
         });
-        let result = response.json();
+        let result = await response.json();
         if (result.error) {
             throw result.error;
         }
@@ -92,7 +92,7 @@ const registerUser = async (username, password) => {
                 password: password
             })
         })
-        let result = response.json();
+        let result = await response.json();
         if (result.error) {
             throw result.error;
         }
@@ -115,7 +115,7 @@ const loginUser = async(username, password) => {
                 password: password
             })
         })
-          let result = response.json();
+          let result = await response.json();
           if (result.error) {
             throw result.error;
         }
@@ -144,7 +144,7 @@ const createActivity = async (name, description) => {
                 description: description
             })
         })
-        let result = response.json();
+        let result = await response.json();
         if (result.error) {
             throw result.error;
         }
@@ -162,7 +162,7 @@ const fetchRoutinesFeaturingActivity = async (activityId) => {
                 'Content-Type': 'application/json',
             },
         })
-        let result = response.json();
+        let result = await response.json();
         if (result.error) {
             throw result.error;
         }
@@ -172,6 +172,33 @@ const fetchRoutinesFeaturingActivity = async (activityId) => {
     }
 };
 
+
+//POST /api/routines (*)
+const createRoutine = async (name, goal, isPublic) => {
+    try {
+        const token = window.localStorage.getItem("token");
+        let response = await fetch('http://fitnesstrac-kr.herokuapp.com/api/routines', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                name: name,
+                goal: goal,
+                isPublic: isPublic
+            })
+        })
+        let result = await response.json();
+        if (result.error) {
+            throw result.error;
+        }
+        return result;
+    } catch (error) {
+        console.log(error);
+        console.error("Uh oh, trouble creating routine");
+    }
+}
 
 module.exports = 
 { 
@@ -183,4 +210,5 @@ module.exports =
     createActivity,
     fetchRoutinesFeaturingActivity, 
     fetchAllRoutines, 
+    createRoutine
 };

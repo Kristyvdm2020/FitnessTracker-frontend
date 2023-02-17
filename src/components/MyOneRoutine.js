@@ -14,7 +14,7 @@ const MyOneRoutine = (props) => {
     } else {
         return(
             <div id='singleRoutine'>
-                <h1><Link to='/routines'>{routine.name}</Link></h1>
+                <h1><Link to='/myRoutines'>{routine.name}</Link></h1>
                 <h2>{routine.goal}</h2>
                 <h2>Activities({routine.activities.length})</h2>
                 <ul>
@@ -37,6 +37,7 @@ const MyOneRoutine = (props) => {
                         })
                     }
                 </select>
+                <button>Add Activity</button>
             </div>
         )
     }
