@@ -81,7 +81,7 @@ const App = ()=> {
           <AllRoutines routines={routines} />
         } />
         <Route path='/myroutines/:id' element={
-          <MyOneRoutine myRoutines={myRoutines} activities={activities} setActivities={setActivities} />
+          <MyOneRoutine myRoutines={myRoutines} activities={activities} setMyRoutines={setMyRoutines} />
         } />
         <Route path='/myroutines' element={
           <AllMyRoutines myRoutines={myRoutines} />
