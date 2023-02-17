@@ -9,7 +9,7 @@ export const ViewLogin = ({setToken}) => {
 
     return (
 
-<div className="login">
+<div className='body-container' id="login">
     <h1>Login to WerkIT</h1>
     <form onSubmit={async(ev) => {
         
