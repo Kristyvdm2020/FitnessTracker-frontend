@@ -44,6 +44,8 @@ useEffect(() => {
       <Routes>
         <Route path='/Register' element={<ViewRegister setToken={setToken} />} />
         <Route path='/Login' element={<ViewLogin setToken={setToken} />} />
+        <Route path='/Activity' element={<CreateActivity token ={token}/>} />
+        {/* <Route path='/Activity' element={<CreateRoutine />} /> */}
         <Route path='/activities/:id' element={
           <SingleActivity activities={activities} />
         } />
