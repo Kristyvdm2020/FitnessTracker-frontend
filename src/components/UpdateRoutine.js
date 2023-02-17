@@ -7,6 +7,7 @@ const UpdateRoutine = (props) => {
     const [name, setName] = useState('');
     const [goal, setGoal] = useState('');
     const [isPublic, setIsPublic] = useState('');
+    const [error, setError] = useState({});
     const id  = Number(useParams().id);
     let routine = myRoutines.find(routine => routine.id === id);
 
@@ -25,12 +26,15 @@ const UpdateRoutine = (props) => {
             passedInObj.isPublic = isPublic;
         }
         const newRoutine = await updateMyRoutine(passedInObj);
-        if(newRoutine) {
+        console.log(newRoutine);
+        if(!newRoutine.error) {
             const allMyRoutines = await fetchUsernameRoutines(user.username);
             setMyRoutines(allMyRoutines);
             routine = myRoutines.find(routine => routine.id === id);
             clearForm();
             setEditForm(false);
+        } else {
+            setError(newRoutine);
         }
     }
 
@@ -38,6 +42,7 @@ const UpdateRoutine = (props) => {
         setName('');
         setGoal('');
         setIsPublic('');
+        setError({});
     }
 
     if(!routine) {
@@ -46,25 +51,28 @@ const UpdateRoutine = (props) => {
         )
     } else {
         return(
-            <form onSubmit={editRoutine}>
-                <input
-                    placeholder="name"
-                    value={name}
-                    onChange={(ev) => setName((ev.target.value))}
-                />
-                <input
-                    placeholder="goal"
-                    value={goal}
-                    onChange={(ev) => setGoal((ev.target.value))}
-                />
-                <select
-                    value={isPublic}
-                    onChange={(ev) => setIsPublic(ev.target.value)}>
-                    <option value="true">Public</option>
-                    <option value="false">Private</option>
-                </select>
-                <button type="submit">Finish</button>
-            </form>    
+            <>
+                <form onSubmit={editRoutine}>
+                    <input
+                        placeholder="name"
+                        value={name}
+                        onChange={(ev) => setName((ev.target.value))}
+                    />
+                    <input
+                        placeholder="goal"
+                        value={goal}
+                        onChange={(ev) => setGoal((ev.target.value))}
+                    />
+                    <select
+                        value={isPublic}
+                        onChange={(ev) => setIsPublic(ev.target.value)}>
+                        <option value="true">Public</option>
+                        <option value="false">Private</option>
+                    </select>
+                    <button type="submit">Finish</button>
+                </form> 
+                {error.message && <p>{error.message}</p>} 
+            </>  
         )
     }
 }

@@ -7,17 +7,20 @@ const AddActivityToRoutine = (props) => {
     const [selectedActivityId, setSelectedActivityId] = useState('');
     const [count, setCount] = useState('');
     const [duration, setDuration] = useState('');
+    const [error, setError] = useState({});
     const id  = Number(useParams().id);
     let routine = myRoutines.find(routine => routine.id === id);
 
     const addActivity = async(ev) => {
         ev.preventDefault();
         const response = await attachActivityToRoutine(id, selectedActivityId, count, duration);
-        if (response) {
+        if (!response.error) {
             const allMyRoutines = await fetchUsernameRoutines(user.username);
             setMyRoutines(allMyRoutines);
             routine = myRoutines.find(routine => routine.id === id);
             clearForm();
+        } else {
+            setError(response)
         }
     }
 
@@ -25,6 +28,7 @@ const AddActivityToRoutine = (props) => {
         setSelectedActivityId('');
         setCount('');
         setDuration('');
+        setError({});
     }
 
     if(!routine) {
@@ -64,6 +68,7 @@ const AddActivityToRoutine = (props) => {
                         <button disabled={selectedActivityId === '' || count === '' || duration === ''} type="submit">
                             Add Activity</button>
                     </form>
+                    {error.message && <p>{error.message}</p>}
                 </div>
             </>
         )

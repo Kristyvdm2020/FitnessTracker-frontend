@@ -10,9 +10,6 @@ const getUser = async (token) => {
             },
         });
         let result = await response.json();
-        if (result.error) {
-            throw result.error;
-        }
         return result;
     } catch (error) {
         console.error(error);
@@ -28,9 +25,6 @@ const fetchAllActivities = async () => {
             },
         })
         let result = await response.json();
-        if (result.error) {
-            throw result.error;
-        }
         return result;
     } catch (error) {
         console.error("Uh oh, trouble fetching Activities");
@@ -46,9 +40,6 @@ const fetchAllRoutines = async () => {
             },
         })
         let result = await response.json();
-        if (result.error) {
-            throw result.error;
-        }
         return result;
     } catch (error) {
         console.error("Uh oh, trouble fetching Routines");
@@ -66,9 +57,6 @@ const fetchUsernameRoutines = async(username) => {
             },
         });
         let result = await response.json();
-        if (result.error) {
-            throw result.error;
-        }
         return result;
     } catch (error) {
         console.error("Uh oh, trouble fetching ", username, " Routines");
@@ -90,9 +78,6 @@ const attachActivityToRoutine = async(routineId, activityId, count, duration) =>
             })
           })
         let result = await response.json();
-        if (result.error) {
-            throw result.error;
-        }
         return result;
     } catch (error) {
         console.log(error);
@@ -100,6 +85,25 @@ const attachActivityToRoutine = async(routineId, activityId, count, duration) =>
     }
 }
 
+//PATCH /api/routines/:routineId (**)
+const updateMyRoutine = async ({routineId, ...fields}) => {
+    try {
+        const token = window.localStorage.getItem("token");
+        let response = await fetch(`http://fitnesstrac-kr.herokuapp.com/api/routines/${routineId}`, {
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({...fields})
+        })
+        let result = await response.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+        console.error('Uh oh, trouble updating the routine');
+    }
+}
 
 ///----------API FUNCTIONS THAT ARE NOT ACTIVELY USED ARE BELOW THIS LINE, but can be used ----------------------
 //User fetch requests
@@ -225,27 +229,7 @@ const createRoutine = async (name, goal, isPublic) => {
 }
 
 
-const updateMyRoutine = async ({routineId, ...fields}) => {
-    try {
-        const token = window.localStorage.getItem("token");
-        let response = await fetch(`http://fitnesstrac-kr.herokuapp.com/api/routines/${routineId}`, {
-            method: "PATCH",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({...fields})
-        })
-        let result = await response.json();
-        if (result.error) {
-            throw result.error;
-        }
-        return result;
-    } catch (error) {
-        console.log(error);
-        console.error('Uh oh, trouble updating the routine');
-    }
-}
+
 
 
 module.exports = 
