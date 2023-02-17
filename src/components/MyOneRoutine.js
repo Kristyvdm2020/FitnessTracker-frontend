@@ -23,7 +23,7 @@ const MyOneRoutine = (props) => {
         )
     } else {
         return(
-            <div id='singleRoutine'>
+            <div className='body-container' id='singleRoutine'>
                 <h1><Link to='/myRoutines'>{routine.name}</Link></h1>
                 <h2>{routine.goal}</h2>
                 <h2>Activities({routine.activities.length})</h2>
