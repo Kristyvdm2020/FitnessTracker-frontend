@@ -54,15 +54,26 @@ const App = ()=> {
   }, [])
 
   return (
-    <div>
+    <div className='container'>
       <header>
+        <div className='top-container'>
+          <div className='user-display'>
+            <h3>Hi {user.username}</h3>
+          </div>
+          <div className='login-register'>
+            <Link to='/Login'><button className='login-btn'>Login</button></Link>
+            <Link to='/Register'><button className='login-btn'>Register</button></Link>
+          </div>
+        </div>         
+         <div className='logo'>
+            <p>Werkit</p>
+          </div>
         <nav>
           <Link to='/'>Home</Link>
           <Link to='/Activities'>Activities</Link>
           <Link to='/Routines'>Routines</Link>
           <Link to='/MyRoutines'>My Routines</Link>
-          <Link to='/Login'>Login</Link>
-          <Link to='/Register'>Register</Link>
+
         </nav>
       </header>
       <Routes>
