@@ -1,25 +1,46 @@
-// const [selectedActivityId, setSelectedActivityId] = useState('');
-//     const [count, setCount] = useState('');
-//     const [duration, setDuration] = useState('');
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { attachActivityToRoutine, fetchUsernameRoutines } from '../api/fetch';
 
-  //   const addActivity = async(ev) => {
-  //     ev.preventDefault();
-  //     const activity = await attachActivityToRoutine(id, selectedActivityId, count, duration); 
-  //     //need to figure out how to refresh the list and make it appear on the page....
-  //     //it does add the activity to the page.
-  // }
+const AddActivityToRoutine = (props) => {
+    const { user, myRoutines, activities, setMyRoutines } = props;
+    const [selectedActivityId, setSelectedActivityId] = useState('');
+    const [count, setCount] = useState('');
+    const [duration, setDuration] = useState('');
+    const id  = Number(useParams().id);
+    let routine = myRoutines.find(routine => routine.id === id);
 
-{/* <Route path='/routines' element={
-           <h3>Add an Activity:</h3>
+    const addActivity = async(ev) => {
+        ev.preventDefault();
+        const response = await attachActivityToRoutine(id, selectedActivityId, count, duration);
+        if (response) {
+            const allMyRoutines = await fetchUsernameRoutines(user.username);
+            setMyRoutines(allMyRoutines);
+            routine = myRoutines.find(routine => routine.id === id);
+            clearForm();
+        }
+    }
+
+    const clearForm = () => {
+        setSelectedActivityId('');
+        setCount('');
+        setDuration('');
+    }
+
+    if(!routine) {
+        return (
+            <h1>You have not created any routines</h1>
+        )
+    } else {
+        return(
+            <>
+                <h3>Add an Activity:</h3>
                 <div>
-                    <form onSubmit={ addActivity }>
+                    <form onSubmit={addActivity}>
                         <select
                             name='Activity'
                             value={selectedActivityId}
-                            onChange={(ev) => {
-                                console.log(ev.target.value)
-                                setSelectedActivityId(Number(ev.target.value))
-                            }}>
+                            onChange={(ev) => { setSelectedActivityId(Number(ev.target.value)) }}>
                             <option value='any'></option>
                             {
                                 activities.map(activity => {
@@ -40,8 +61,13 @@
                             onChange={(ev) => setDuration(Number(ev.target.value))}
                         />
 
-                        <button disabled={selectedActivityId === '' || count === '' || duration === ''}>
+                        <button disabled={selectedActivityId === '' || count === '' || duration === ''} type="submit">
                             Add Activity</button>
                     </form>
                 </div>
-        } /> */}
+            </>
+        )
+    }
+}
+
+export default AddActivityToRoutine;
