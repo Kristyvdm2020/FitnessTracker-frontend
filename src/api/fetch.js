@@ -75,6 +75,31 @@ const fetchUsernameRoutines = async(username) => {
     }
 }
 
+//POST /api/routines/:routineId/activities 
+const attachActivityToRoutine = async(routineId, activityId, count, duration) => {
+    try {
+        let response = await fetch(`http://fitnesstrac-kr.herokuapp.com/api/routines/${routineId}/activities`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              activityId: activityId,
+              count: count, 
+              duration: duration
+            })
+          })
+        let result = await response.json();
+        if (result.error) {
+            throw result.error;
+        }
+        return result;
+    } catch (error) {
+        console.log(error);
+        console.error("Uh oh, trouble attaching activity to routine");
+    }
+}
+
 
 ///----------API FUNCTIONS THAT ARE NOT ACTIVELY USED ARE BELOW THIS LINE, but can be used ----------------------
 //User fetch requests
@@ -199,30 +224,7 @@ const createRoutine = async (name, goal, isPublic) => {
     }
 }
 
-//POST /api/routines/:routineId/activities 
-const attachActivityToRoutine = async(routineId, activityId, count, duration) => {
-    try {
-        let response = await fetch(`http://fitnesstrac-kr.herokuapp.com/api/routines/${routineId}/activities`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              activityId: activityId,
-              count: count, 
-              duration: duration
-            })
-          })
-        let result = await response.json();
-        if (result.error) {
-            throw result.error;
-        }
-        return result;
-    } catch (error) {
-        console.log(error);
-        console.error("Uh oh, trouble attaching activity to routine");
-    }
-}
+
 
 module.exports = 
 { 

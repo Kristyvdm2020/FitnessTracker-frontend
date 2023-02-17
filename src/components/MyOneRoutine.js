@@ -13,8 +13,7 @@ const MyOneRoutine = (props) => {
     const addActivity = async(ev) => {
         ev.preventDefault();
         const response = await attachActivityToRoutine(id, selectedActivityId, count, duration);
-        console.log(response);
-        if (!response) {
+        if (response) {
             const allMyRoutines = await fetchUsernameRoutines(user.username);
             setMyRoutines(allMyRoutines);
             routine = myRoutines.find(routine => routine.id === id);
