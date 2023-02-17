@@ -15,7 +15,7 @@ import Home from './components/Home';
 
 const App = ()=> {
 
-  loginUser("Kristy", "12345678");
+  
   const [activities, setActivities] = useState([]);
   const [routines, setRoutines] = useState([]);
   const [user, setUser] = useState({});
@@ -83,9 +83,9 @@ const App = ()=> {
 
       </header>
       <Routes>
-        <Route path='/Register' element={<ViewRegister setToken={setToken} />} />
-        <Route path='/Login' element={<ViewLogin setToken={setToken} />} />
-        <Route path='/Activity' element={<CreateActivity token ={token}/>} />
+        <Route path='/Register' element={<ViewRegister />} />
+        <Route path='/Login' element={<ViewLogin  />} />
+        <Route path='/Activity' element={<CreateActivity />} />
         {/* <Route path='/Activity' element={<CreateRoutine />} /> */}
         <Route path='/activities/:id' element={
           <SingleActivity activities={activities} />
