@@ -37,6 +37,15 @@ body {
   align-items: center;
 }
 
+.icon {
+  height: 45px;
+  width: 45px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  background-color:#FF9671;
+  border-radius: 5px;
+}
+
 .logo {
   width: 80vw;
   height: 70px;
@@ -47,7 +56,8 @@ body {
 
 }
 
-div.logo p {  
+div.logo p {
+  font-size: 40px;  
   margin: 0px;
   display: flex;
   height: 70px;
@@ -92,21 +102,33 @@ nav {
 }
 
 nav a {
-  border-radius: 5px;  
-  background-color: #2D6A8C;
-  color: white;
+  border-radius: 50px;
+  border: 1px solid #FF6F91;  
+  background-color: #ffffff;
+  color:  #FF6F91;
   padding: 1rem;
-  width: 98px;
-  text-decoration: none
+  width: 120px;
+  text-decoration: none;
+  transition: 0.3s;
+
 }
 
+nav a:hover {
+  background-color: #FF6F91;
+  color: white;
+  box-shadow: 2px 5px 2px 1px rgb(233, 233, 233);
+}
+
+/*----- Main Body -----*/
+
 .body-container {
+  list-style-type: none;
   margin-top: 25px;
   width: 75vw;
   min-height: 40vh;
   border-radius: 5px;
-  /* background-color: #D5CABD; */
-  /* border: 1px solid black; */
+  background-color: #e5e5e5;
+  border: 1px solid #bcbcbc;
 }
 
 /*----- Activities -----*/

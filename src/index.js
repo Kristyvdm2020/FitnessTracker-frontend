@@ -58,7 +58,7 @@ const App = ()=> {
       <header>
         <div className='top-container'>
           <div className='user-display'>
-            <p>Hi {user.username}</p><button className='logout-btn'>Logout</button>
+            <div className='icon'></div><p>Hi {user.username}</p><button className='logout-btn'>Logout</button>
           </div>
           <div className='login-register'>
             <Link to='/Login'><button className='login-btn'>Login</button></Link>
@@ -70,10 +70,10 @@ const App = ()=> {
               <p>Werkit</p>
             </div>
           <nav>
-            <Link to='/'>Home</Link>
-            <Link to='/Activities'>Activities</Link>
-            <Link to='/Routines'>Routines</Link>
-            <Link to='/MyRoutines'>My Routines</Link>
+            <Link to='/'>HOME</Link>
+            <Link to='/Activities'>ACTIVITIES</Link>
+            <Link to='/Routines'>ROUTINES</Link>
+            <Link to='/MyRoutines'>MY ROUTINES</Link>
 
           </nav>
         </div>  
