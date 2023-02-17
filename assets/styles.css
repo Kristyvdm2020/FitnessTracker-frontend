@@ -1,12 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 body {
-  font-family: verdana;
-  
+  font-family: 'Ubuntu', sans-serif;
   justify-content: center;
 }
 
 .app {
   display: flex;
 }
+
+.top-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.user-display{
+  display: flex;
+  flex-direction: row;
+}
+
+.user-display button {
+  cursor: pointer;
+  height: 45px;
+  padding: 15px 25px;
+  border-radius: 5px;
+  border-style: none;
+  margin-left: 20px;
+}
+
 /*------ Login/Register ------*/
 
 
@@ -17,9 +38,9 @@ body {
 }
 
 .logo {
-
+  width: 80vw;
   height: 70px;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   background-color: rgb(43, 43, 63);
   color: rgb(255, 255, 255);
   border-radius: 5px;
@@ -41,27 +62,54 @@ div.logo p {
   border-radius: 5px;
   border-style: none;
   margin-left: 20px;
+  color: #F9F7FF;
+  background-color: #00B2C2;
+}
+
+.logout-btn {
+  background-color: #00C9A7;
+  color: white;
 }
 
 
 /*----- Nav -----*/
+
+.logo-nav {
+  display: flex;  
+  align-items: center;
+  flex-direction: column;
+}
+
 nav {
-  width: 80vw;
+  width: 75vw;
   height: 50px;
   color: rgb(255, 255, 255);
   text-align: center;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+
 }
 
 nav a {
   border-radius: 5px;  
-  background-color: rgb(43, 43, 63);
+  background-color: #2D6A8C;
   color: white;
   padding: 1rem;
+  width: 98px;
+  text-decoration: none
 }
+
+.body-container {
+  margin-top: 25px;
+  width: 75vw;
+  min-height: 40vh;
+  border-radius: 5px;
+  /* background-color: #D5CABD; */
+  /* border: 1px solid black; */
+}
+
+/*----- Activities -----*/
 
 #activities-collection {
   font-size: 1rem;
@@ -82,3 +130,5 @@ nav a {
   border-radius: 1rem;
   margin: 1rem;
 }
+
+/*----- Routines -----*/

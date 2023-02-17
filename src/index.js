@@ -58,23 +58,25 @@ const App = ()=> {
       <header>
         <div className='top-container'>
           <div className='user-display'>
-            <h3>Hi {user.username}</h3>
+            <p>Hi {user.username}</p><button className='logout-btn'>Logout</button>
           </div>
           <div className='login-register'>
             <Link to='/Login'><button className='login-btn'>Login</button></Link>
             <Link to='/Register'><button className='login-btn'>Register</button></Link>
           </div>
-        </div>         
-         <div className='logo'>
-            <p>Werkit</p>
-          </div>
-        <nav>
-          <Link to='/'>Home</Link>
-          <Link to='/Activities'>Activities</Link>
-          <Link to='/Routines'>Routines</Link>
-          <Link to='/MyRoutines'>My Routines</Link>
+        </div>
+        <div className='logo-nav'>       
+          <div className='logo'>
+              <p>Werkit</p>
+            </div>
+          <nav>
+            <Link to='/'>Home</Link>
+            <Link to='/Activities'>Activities</Link>
+            <Link to='/Routines'>Routines</Link>
+            <Link to='/MyRoutines'>My Routines</Link>
 
-        </nav>
+          </nav>
+        </div>  
       </header>
       <Routes>
         <Route path='/Register' element={<ViewRegister />} />

@@ -6,7 +6,7 @@ const AllMyRoutines = (props) => {
     const { myRoutines } = props;
     console.log(props);
     return (
-        <div id='routines-collection'>
+        <div className='body-container' id='routines-collection'>
             <ul id='routines'>
                 {
                     myRoutines.map(routine => {
