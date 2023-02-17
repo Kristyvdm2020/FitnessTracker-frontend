@@ -15,7 +15,7 @@ import Home from './components/Home';
 
 const App = ()=> {
 
-  
+ 
   const [activities, setActivities] = useState([]);
   const [routines, setRoutines] = useState([]);
   const [user, setUser] = useState({});
@@ -85,7 +85,7 @@ const App = ()=> {
       <Routes>
         <Route path='/Register' element={<ViewRegister />} />
         <Route path='/Login' element={<ViewLogin  />} />
-        <Route path='/Activity' element={<CreateActivity />} />
+        {/* <Route path='/Activity' element={<CreateActivity />} /> */}
         {/* <Route path='/Activity' element={<CreateRoutine />} /> */}
         <Route path='/activities/:id' element={
           <SingleActivity activities={activities} />
