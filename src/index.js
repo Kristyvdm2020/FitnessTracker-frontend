@@ -58,7 +58,7 @@ const App = ()=> {
       <header>
         <div className='top-container'>
           <div className='user-display'>
-            <div className='icon'></div><p>Hi {user.username}</p><button className='logout-btn'>Logout</button>
+            <div className='icon'></div><p>Hi {user.username}!</p><button className='logout-btn'>Logout</button>
           </div>
           <div className='login-register'>
             <Link to='/Login'><button className='login-btn'>Login</button></Link>
