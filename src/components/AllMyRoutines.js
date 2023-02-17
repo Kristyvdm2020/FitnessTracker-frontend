@@ -12,7 +12,7 @@ const AllMyRoutines = (props) => {
                     myRoutines.map(routine => {
                         return (
                             <li key={routine.id}>
-                                <Link to={`/routines/${routine.id}`}>{routine.name}</Link></li>
+                                <Link to={`/myRoutines/${routine.id}`}>{routine.name}</Link></li>
                         )
                     })
                 }

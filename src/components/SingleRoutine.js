@@ -16,6 +16,13 @@ const SingleRoutine = (props) => {
             <div id='singleRoutine'>
                 <h1><Link to='/routines'>{routine.name}</Link></h1>
                 <h2>{routine.goal}</h2>
+                <h2>Activities({routine.activities.length})</h2>
+                <ul>
+                    {routine.activities.map(activity => {
+                        console.log(activity)
+                        return (<li key={activity.id}>{activity.name}(Count:{activity.count} Duration:{activity.duration})
+                        <p>{activity.description}</p></li>)})}
+                </ul>
             </div>
         )
     }
