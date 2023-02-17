@@ -29,3 +29,6 @@ const SingleRoutine = (props) => {
 }
 
 export default SingleRoutine
+
+//Bri, could we maybe see more info (like the creatorName and any other parts of the routine object that you
+//find interesting?)
