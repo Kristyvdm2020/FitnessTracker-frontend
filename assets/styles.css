@@ -2,6 +2,26 @@ body {
   font-family: verdana;
 }
 
+.app {
+  display: flex;
+}
+
+/*----- Nav -----*/
+nav {
+  width: 80vw;
+  height: 40px;
+  background-color: rgb(43, 43, 63);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+nav a {
+  color: white;
+}
+
 #activities-collection {
   font-size: 1rem;
 }
