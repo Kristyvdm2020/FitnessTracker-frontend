@@ -8,7 +8,9 @@ import AllActivities from './components/AllActivities';
 import SingleActivity from './components/SingleActivity';
 
 const App = ()=> {
- loginUser("Kristy", "12345678");
+  const [token, setToken] = useState('');
+
+//  loginUser("Kristy", "12345678");
  const [activities, setActivities] = useState([]);
 
  const fetchAllActivities = () => {
@@ -32,16 +34,16 @@ useEffect(() => {
     <div>
       <header>
         <nav>
-          <Link to='/Home'>Home</Link>
-          <Link to='/Activities'>Activities</Link>
-          <Link to='/Routines'>Routines</Link>
-          <Link to='/Login'>Login</Link>
-          <Link to='/Register'>Register</Link>
+          <Link to='/Home'> Home</Link>
+          <Link to='/Activities'> Activities</Link>
+          <Link to='/Routines'> Routines</Link>
+          <Link to='/Login'> Login</Link>
+          <Link to='/Register'> Register</Link>
         </nav>
       </header>
       <Routes>
-        <Route path='/Register' element={<ViewRegister />} />
-        <Route path='/Login' element={<ViewLogin />} />
+        <Route path='/Register' element={<ViewRegister setToken={setToken} />} />
+        <Route path='/Login' element={<ViewLogin setToken={setToken} />} />
         <Route path='/activities/:id' element={
           <SingleActivity activities={activities} />
         } />
