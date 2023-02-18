@@ -50,6 +50,12 @@ const App = ()=> {
     setRoutines(allRoutines);
   }
 
+  const logout = () => {
+    window.localStorage.removeItem('token');
+    setUser({});
+    setMyRoutines([]);
+  }
+
   useEffect(() => {
     checkToken();
     loadData();
@@ -61,7 +67,9 @@ const App = ()=> {
 
         <div className='top-container'>
           <div className='user-display'>
-            <div className='icon'></div><p>Hi {user.username}!</p><button className='logout-btn'>Logout</button>
+            { user.username ? <><div className='icon'></div>
+            <p>Hi {user.username}!</p>
+            <button className='logout-btn' onClick={ logout }>Logout</button></>: null}
           </div>
           <div className='login-register'>
             <Link to='/Login'><button className='login-btn'>Login</button></Link>
@@ -100,7 +108,7 @@ const App = ()=> {
           <AllRoutines routines={routines} />
         } />
         <Route path='/myroutines/:id' element={
-          <MyOneRoutine myRoutines={myRoutines} activities={activities} setMyRoutines={setMyRoutines} />
+          <MyOneRoutine user={user} myRoutines={myRoutines} activities={activities} setMyRoutines={setMyRoutines} />
         } />
         <Route path='/myroutines' element={
           <AllMyRoutines myRoutines={myRoutines} />
