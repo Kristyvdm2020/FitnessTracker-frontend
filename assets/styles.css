@@ -49,9 +49,13 @@ body {
 
 .logo {
   width: 80vw;
-  height: 70px;
+  height: 100px;
   margin-bottom: 25px;
-  background-color: rgb(43, 43, 63);
+  background-image: url('https://t4.ftcdn.net/jpg/04/23/87/53/360_F_423875308_S4w1IW5aReFvYzMGt4bj98GgvEmVKHnd.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  /* background-color: rgb(43, 43, 63); */
   color: rgb(255, 255, 255);
   border-radius: 5px;
 
@@ -61,7 +65,7 @@ div.logo p {
   font-size: 40px;  
   margin: 0px;
   display: flex;
-  height: 70px;
+  height: 100px;
   align-items: center;
   flex-direction: column;
   justify-content: center;
@@ -114,8 +118,18 @@ nav a {
 
 }
 
+.active {
+  background-color: #A555EC;
+  border: 1px solid #A555EC;
+  color: white;
+
+}
+
+
 nav a:hover {
   background-color: #FF6F91;
+  border: 1px solid #FF6F91;  
+
   color: white;
   box-shadow: 2px 5px 2px 1px rgb(233, 233, 233);
 }
@@ -139,13 +153,15 @@ nav a:hover {
 }
 
 #activities {
+  padding: 0;
   list-style-type: none;
 }
 
 #activities>li {
-  /* background-color: greenyellow;
-  border-radius: 1rem; */
-  margin: 1rem;
+  /* background-color: greenyellow; */
+  border: 1px solid grey;
+ padding: 10px;
+ margin: 20px;
 }
 
 #singleActivity {

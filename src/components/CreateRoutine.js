@@ -15,7 +15,6 @@ export const CreateRoutine = (props) => {
     
     const newRoutine = async (ev) => {
         ev.preventDefault();
-        // await createRoutine(name, goal, isPublic);
         const response = await createRoutine(name, goal, isPublic);
         if (!response.error) {
             console.log('yay')

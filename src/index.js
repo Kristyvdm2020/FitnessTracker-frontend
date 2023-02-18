@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Routes, Route, HashRouter} from 'react-router-dom';
+import { NavLink, Routes, Route, HashRouter} from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { loginUser } from './api/fetch'; //this is only here right now for getting a token for development
 import { getUser, fetchUsernameRoutines, fetchAllActivities, fetchAllRoutines } from './api/fetch'
@@ -73,8 +73,8 @@ const App = ()=> {
             <button className='logout-btn' onClick={ logout }>Logout</button></>: null}
           </div>
           <div className='login-register'>
-            <Link to='/Login'><button className='login-btn'>Login</button></Link>
-            <Link to='/Register'><button className='login-btn'>Register</button></Link>
+            <NavLink to='/Login'><button className='login-btn'>Login</button></NavLink>
+            <NavLink to='/Register'><button className='login-btn'>Register</button></NavLink>
           </div>
         </div>
         <div className='logo-nav'>       
@@ -82,10 +82,10 @@ const App = ()=> {
               <p>Werkit</p>
             </div>
           <nav>
-            <Link to='/'>HOME</Link>
-            <Link to='/Activities'>ACTIVITIES</Link>
-            <Link to='/Routines'>ROUTINES</Link>
-            <Link to='/MyRoutines'>MY ROUTINES</Link>
+            <NavLink activeClassName='active' to='/'>HOME</NavLink>
+            <NavLink to='/Activities'>ACTIVITIES</NavLink>
+            <NavLink to='/Routines'>ROUTINES</NavLink>
+            <NavLink to='/MyRoutines'>MY ROUTINES</NavLink>
 
           </nav>
         </div>  
