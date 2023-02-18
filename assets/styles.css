@@ -13,6 +13,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .user-display{
@@ -97,11 +98,12 @@ div.logo p {
 
 nav {
   width: 75vw;
-  height: 50px;
+  height: auto;
   color: rgb(255, 255, 255);
   text-align: center;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
 
 }
@@ -143,7 +145,22 @@ nav a:hover {
   min-height: 40vh;
   border-radius: 5px;
   background-color: #e5e5e5;
-  border: 1px solid #bcbcbc;
+  border: 1px solid #e5e5e5;
+}
+/*----- Home -----*/
+
+.home-container {
+
+  width: 60vw;
+  min-height: 40vh;
+  text-align: center;
+}
+.home-img {
+  max-width: 80%;;
+  height: auto;
+  /* clip-path: polygon(0 0, 100% 12%, 100% 76%, 0 100%); */
+  clip-path: polygon(0 25%, 100% 12%, 100% 76%, 0 92%);
+
 }
 
 /*----- Activities -----*/
@@ -165,10 +182,55 @@ nav a:hover {
   margin: 20px;
 }
 
-#singleActivity {
-  background-color: greenyellow;
-  border-radius: 1rem;
-  margin: 1rem;
+#activities a {
+  text-decoration: none;
+  color: #A555EC;
+
+}
+
+#activities a:hover {
+  text-decoration: underline;
+}
+
+#singleActivity, #singleRoutine {
+  background-color: rgb(249, 249, 249);
+  box-shadow: 2px 5px 2px 1px rgb(233, 233, 233);
+  width: 60vw;
+  border-radius: 15px;;
+  min-height: 40vh;
+  padding: 20px;
+  margin: 20px;
+}
+
+#singleActivity a, #singleRoutine a {
+  color: #8ee982;
+  text-decoration: none;
 }
 
 /*----- Routines -----*/
+
+#routines {
+  padding: 0;
+  list-style-type: none;
+}
+
+#routines li {
+  background-color: whitesmoke;
+  border: 1px solid whitesmoke;
+  border-radius: 15px;;
+  padding: 20px;
+  margin: 20px;
+}
+
+#routines a {
+  text-decoration: none;
+  color: #A555EC;
+}
+
+#routines a:hover {
+  text-decoration: underline;
+}
+
+#singleRoutine li {
+  list-style-type: circle;
+}

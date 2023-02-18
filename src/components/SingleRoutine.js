@@ -12,7 +12,7 @@ const SingleRoutine = (props) => {
         )
     } else {
         return (
-            <div className='body-container' id='singleRoutine'>
+            <div id='singleRoutine'>
                 <h1><Link to='/routines'>{routine.name}</Link> by {routine.creatorName}</h1>
                 <h2>{routine.goal}</h2>
                 <h2>Activities({routine.activities.length})</h2>
