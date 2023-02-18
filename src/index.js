@@ -7,6 +7,7 @@ import { ViewRegister } from './components/ViewRegister';
 import { ViewLogin } from './components/ViewLogin';
 import AllActivities from './components/AllActivities';
 import SingleActivity from './components/SingleActivity';
+import { CreateRoutine } from './components/CreateRoutine';
 import SingleRoutine from './components/SingleRoutine';
 import AllRoutines from './components/AllRoutines';
 import MyOneRoutine from './components/MyOneRoutine';
@@ -94,7 +95,7 @@ const App = ()=> {
         <Route path='/Register' element={<ViewRegister />} />
         <Route path='/Login' element={<ViewLogin  />} />
         {/* <Route path='/Activity' element={<CreateActivity />} /> */}
-        {/* <Route path='/Activity' element={<CreateRoutine />} /> */}
+        <Route path='/newroutine' element={<CreateRoutine  user={user} myRoutines={myRoutines} setMyRoutines={setMyRoutines} />} />
         <Route path='/activities/:id' element={
           <SingleActivity activities={activities} />
         } />

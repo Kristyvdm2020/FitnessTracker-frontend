@@ -8,8 +8,8 @@ const MyOneRoutine = (props) => {
     const { user, myRoutines, activities, setMyRoutines } = props;
     const [editRoutineForm, setEditRoutineForm] = useState(false);
     const [editActivityForm, setEditActivityForm] = useState(false);
-    const [count, setCount] = useState('');
-    const [duration, setDuration] = useState('');
+    const [count, setCount] = useState(0);
+    const [duration, setDuration] = useState(0);
     const [routineActivityId, setRoutineActivityId] = useState(0);
     const [error, setError] = useState({});
     const id  = Number(useParams().id);
@@ -49,9 +49,9 @@ const MyOneRoutine = (props) => {
         }
     }
 
-    const setUpEditActivityForm = async (ev) => {
+    const setUpEditActivityForm = async (ev,activityId) => {
         setRoutineActivityId(ev.target.value);
-        setEditActivityForm(true);
+        setEditActivityForm(!editActivityForm);
     }
 
     const clearForm = () => {
@@ -76,8 +76,12 @@ const MyOneRoutine = (props) => {
                     {routine.activities.map(activity => {
                         //console.log(activity);
                         return (<li key={activity.id}>{activity.name}(Count:{activity.count} Duration:{activity.duration})
-                            <button value={activity.routineActivityId} onClick={setUpEditActivityForm}>Edit</button>
-                            <button value={activity.routineActivityId} onClick={deleteActivityFromRoutine}>Delete</button>
+                            <button
+                                value={activity.routineActivityId} 
+                                onClick={(ev) =>setUpEditActivityForm(ev, activity.routineActivityId)}>Edit</button>
+                            <button
+                                value={activity.routineActivityId} 
+                                onClick={deleteActivityFromRoutine}>Delete</button>
                             <p>{activity.description}</p>
                             {error.message && <p>{error.message}</p>}
                             {editActivityForm ?
@@ -85,12 +89,12 @@ const MyOneRoutine = (props) => {
                                     <input
                                         placeholder="count"
                                         value={count}
-                                        onChange={(ev) => setCount(Number(ev.target.value))}
+                                        onChange={(ev) => setCount(ev.target.value)}
                                     />
                                     <input
                                         placeholder="duration"
                                         value={duration}
-                                        onChange={(ev) => setDuration(Number(ev.target.value))}
+                                        onChange={(ev) => setDuration(ev.target.value)}
                                     />
 
                                     <button type="submit">Finished!</button>
