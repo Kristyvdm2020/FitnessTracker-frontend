@@ -22,8 +22,6 @@ const App = ()=> {
   const [user, setUser] = useState({});
   const [myRoutines, setMyRoutines] = useState([]);
 
-
-
   const loadUsernameRoutines = async () => {
     const allMyRoutines = await fetchUsernameRoutines(user.username);
     setMyRoutines(allMyRoutines);
@@ -82,7 +80,7 @@ const App = ()=> {
               <p>Werkit</p>
             </div>
           <nav>
-            <NavLink activeClassName='active' to='/'>HOME</NavLink>
+            <NavLink to='/'>HOME</NavLink>
             <NavLink to='/Activities'>ACTIVITIES</NavLink>
             <NavLink to='/Routines'>ROUTINES</NavLink>
             <NavLink to='/MyRoutines'>MY ROUTINES</NavLink>
