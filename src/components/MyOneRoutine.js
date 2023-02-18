@@ -7,49 +7,51 @@ import { updateRoutineActivity, deleteRoutineActivity, fetchUsernameRoutines } f
 const MyOneRoutine = (props) => {
     const { user, myRoutines, activities, setMyRoutines } = props;
     const [editRoutineForm, setEditRoutineForm] = useState(false);
+    const [editActivityForm, setEditActivityForm] = useState(false);
     const [count, setCount] = useState('');
     const [duration, setDuration] = useState('');
-    const [routineActivityId, setRoutineActivityId] = useState('');
+    const [routineActivityId, setRoutineActivityId] = useState(0);
     const [error, setError] = useState({});
     const id  = Number(useParams().id);
     let routine = myRoutines.find(routine => routine.id === id);
 
-    //Here lies the code that is working on updating the activity count and duration, but is not operational
-    // const editRoutineActivity = async(ev) => {
-    //     ev.preventDefault();
-    //     console.log(routineActivityId);
-    //     const passedInObj = {
-    //         routineActivityId: routineActivityId
-    //     }
-    //     if(count !== '') {
-    //         passedInObj.count = count;
-    //     }
-    //     if(duration !== '') {
-    //         passedInObj.duration = duration;
-    //     }
-    //     const response = await updateRoutineActivity(passedInObj);
-    //     console.log(response);
-    //     if(!response.error) {
-    //         const allMyRoutines = await fetchUsernameRoutines(user.username);
-    //         setMyRoutines(allMyRoutines);
-    //         routine = myRoutines.find(routine => routine.id === id);
-    //         clearForm();
-    //         //setEditRoutineForm(false);
-    //     }
-    //     // } else {
-    //     //     setError(newRoutine);
-    //     // }
-    // }
+    const editRoutineActivity = async (ev) => {
+        ev.preventDefault();
+        const passedInObj = {
+            routineActivityId: routineActivityId
+        }
+        if (count !== '') {
+            passedInObj.count = count;
+        }
+        if (duration !== '') {
+            passedInObj.duration = duration;
+        }
+        const response = await updateRoutineActivity(passedInObj);
+        if (!response.error) {
+            const allMyRoutines = await fetchUsernameRoutines(user.username);
+            setMyRoutines(allMyRoutines);
+            routine = myRoutines.find(routine => routine.id === id);
+            clearForm();
+            setEditActivityForm(false);
+        } else {
+            setError(response);
+        }
+    }
 
-    const deleteActivityFromRoutine = async(ev) => {
+    const deleteActivityFromRoutine = async (ev) => {
         let response = await deleteRoutineActivity(Number(ev.target.value));
-        if(!response.error) {
+        if (!response.error) {
             const allMyRoutines = await fetchUsernameRoutines(user.username);
             setMyRoutines(allMyRoutines);
             routine = myRoutines.find(routine => routine.id === id);
         } else {
             setError(response);
         }
+    }
+
+    const setUpEditActivityForm = async (ev) => {
+        setRoutineActivityId(ev.target.value);
+        setEditActivityForm(true);
     }
 
     const clearForm = () => {
@@ -73,24 +75,27 @@ const MyOneRoutine = (props) => {
                 <ul>
                     {routine.activities.map(activity => {
                         //console.log(activity);
-                        return (<li key={activity.id}>{activity.name}(Count:{activity.count} Duration:{activity.duration}) <button value={activity.routineActivityId}>Edit</button> 
-                        <button value={activity.routineActivityId} onClick={deleteActivityFromRoutine}>Delete</button>
+                        return (<li key={activity.id}>{activity.name}(Count:{activity.count} Duration:{activity.duration})
+                            <button value={activity.routineActivityId} onClick={setUpEditActivityForm}>Edit</button>
+                            <button value={activity.routineActivityId} onClick={deleteActivityFromRoutine}>Delete</button>
                             <p>{activity.description}</p>
                             {error.message && <p>{error.message}</p>}
-                            {/* <form onSubmit={ editRoutineActivity }>
-                                <input
-                                    placeholder="count"
-                                    value={count}
-                                    onChange={(ev) => setCount(Number(ev.target.value))}
-                                />
-                                <input
-                                    placeholder="duration"
-                                    value={duration}
-                                    onChange={(ev) => setDuration(Number(ev.target.value))}
-                                />
+                            {editActivityForm ?
+                                <form onSubmit={editRoutineActivity}>
+                                    <input
+                                        placeholder="count"
+                                        value={count}
+                                        onChange={(ev) => setCount(Number(ev.target.value))}
+                                    />
+                                    <input
+                                        placeholder="duration"
+                                        value={duration}
+                                        onChange={(ev) => setDuration(Number(ev.target.value))}
+                                    />
 
-                                <button type="submit">Finished!</button>
-                            </form> */}
+                                    <button type="submit">Finished!</button>
+                                </form>
+                                : null}
                         </li>)
                     })}
                 </ul>

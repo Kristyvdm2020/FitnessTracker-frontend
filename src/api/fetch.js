@@ -233,7 +233,7 @@ const createRoutine = async (name, goal, isPublic) => {
 const updateRoutineActivity = async ({routineActivityId, ...fields }) => {
     try {
         const token = window.localStorage.getItem("token");
-        let response = await fetch(`http://fitnesstrac-kr.herokuapp.com/api/api/routine_activities/${routineActivityId}`, {
+        let response = await fetch(`http://fitnesstrac-kr.herokuapp.com/api/routine_activities/${routineActivityId}`, {
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json',
@@ -250,21 +250,18 @@ const updateRoutineActivity = async ({routineActivityId, ...fields }) => {
 }
 
 //DELETE /api/routine_activities/:routineActivityId (**)
-const deleteRoutineActivity = async(id) => {
+const deleteRoutineActivity = async (id) => {
     try {
         const token = window.localStorage.getItem("token");
         let response = await fetch(`http://fitnesstrac-kr.herokuapp.com/api/routine_activities/${id}`, {
             method: "DELETE",
             headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             }
-          })
-          let result = await response.json();
-          if (result.error) {
-            throw result.error;
-        }
-          return result;
+        })
+        let result = await response.json();
+        return result;
     } catch (error) {
         console.log(error);
         console.error("Error deleting routine activity");
