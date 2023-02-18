@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { loginUser } from "../api/fetch";
 
-export const ViewLogin = ({setToken}) => {
+export const ViewLogin = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -16,7 +16,7 @@ export const ViewLogin = ({setToken}) => {
         try {
             ev.preventDefault();
             const token = await loginUser(username, password);
-            setToken(token);
+        localStorage.setItem('token', token);
             console.log('login success');
         }
         catch (error){

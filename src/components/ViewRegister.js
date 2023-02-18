@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { registerUser } from "../api/fetch"
 
-export const ViewRegister = ({setToken}) => { 
+export const ViewRegister = () => { 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -11,9 +11,10 @@ export const ViewRegister = ({setToken}) => {
             <form onSubmit={async(ev) => { 
         try {
             ev.preventDefault();
+            console.log(username, password)
             const token = await registerUser(username, password);
-           setToken(token);
-           console.log('register success');
+            localStorage.setItem('token', token)
+           console.log('Register');
             // const redirectlogin = () => {
             // }
 
@@ -30,7 +31,7 @@ export const ViewRegister = ({setToken}) => {
         />
         <input
           placeholder="password"
-          type={'password'}
+        //   type={'password'}
           value={password}
           onChange={(ev) => setPassword(ev.target.value)}
         />

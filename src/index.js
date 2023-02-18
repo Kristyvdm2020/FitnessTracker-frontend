@@ -36,7 +36,7 @@ const App = ()=> {
 
 
   const checkToken = async () => {
-    const token = window.localStorage.getItem('token');
+    const token = window.localStorage.getItem('token', token);
     if (token) {
       const user = await getUser(token);
       setUser(user);
