@@ -12,7 +12,8 @@ const AllRoutines = (props) => {
                     routines.map(routine => {
                         return (
                             <li key={routine.id}>
-                                <Link to={`/routines/${routine.id}`}>{routine.name}</Link></li>
+                                <Link to={`/routines/${routine.id}`}>{routine.name}</Link> by {routine.creatorName}:
+                                <p>{routine.goal}</p></li>
                         )
                     })
                 }

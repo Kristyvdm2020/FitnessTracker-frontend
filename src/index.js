@@ -50,6 +50,12 @@ const App = ()=> {
     setRoutines(allRoutines);
   }
 
+  const logout = () => {
+    window.localStorage.removeItem('token');
+    setUser({});
+    setMyRoutines([]);
+  }
+
   useEffect(() => {
     checkToken();
     loadData();
@@ -61,7 +67,9 @@ const App = ()=> {
 
         <div className='top-container'>
           <div className='user-display'>
-            <div className='icon'></div><p>Hi {user.username}!</p><button className='logout-btn'>Logout</button>
+            { user.username ? <><div className='icon'></div>
+            <p>Hi {user.username}!</p>
+            <button className='logout-btn' onClick={ logout }>Logout</button></>: null}
           </div>
           <div className='login-register'>
             <Link to='/Login'><button className='login-btn'>Login</button></Link>

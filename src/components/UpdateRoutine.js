@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { updateMyRoutine, fetchUsernameRoutines } from '../api/fetch';
 
 const UpdateRoutine = (props) => {
-    const { user, myRoutines, setMyRoutines, setEditForm } = props;
+    const { user, myRoutines, setMyRoutines, setEditRoutineForm } = props;
     const [name, setName] = useState('');
     const [goal, setGoal] = useState('');
     const [isPublic, setIsPublic] = useState('');
@@ -32,7 +32,7 @@ const UpdateRoutine = (props) => {
             setMyRoutines(allMyRoutines);
             routine = myRoutines.find(routine => routine.id === id);
             clearForm();
-            setEditForm(false);
+            setEditRoutineForm(false);
         } else {
             setError(newRoutine);
         }
