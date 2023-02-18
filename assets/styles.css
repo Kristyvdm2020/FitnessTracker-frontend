@@ -158,10 +158,11 @@ nav a:hover {
 }
 
 #activities>li {
-  /* background-color: greenyellow; */
-  border: 1px solid grey;
- padding: 10px;
- margin: 20px;
+  background-color: whitesmoke;
+  border: 1px solid whitesmoke;
+  border-radius: 15px;;
+  padding: 20px;
+  margin: 20px;
 }
 
 #singleActivity {
