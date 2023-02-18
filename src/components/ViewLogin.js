@@ -16,7 +16,7 @@ export const ViewLogin = () => {
         try {
             ev.preventDefault();
             const token = await loginUser(username, password);
-        localStorage.setItem('token', token);
+        window.localStorage.setItem('token', token.token);
             console.log('login success');
         }
         catch (error){

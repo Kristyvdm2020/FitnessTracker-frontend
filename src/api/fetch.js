@@ -81,7 +81,7 @@ const fetchUsernameRoutines = async(username) => {
 //User fetch requests
 //POST /api/users/register
 const registerUser = async (username, password) => {
-    console.log('this is username and password', username, password)
+
     try {
         let response = await fetch('http://fitnesstrac-kr.herokuapp.com/api/users/register', {
             method: "POST",
@@ -97,7 +97,6 @@ const registerUser = async (username, password) => {
         if (result.error) {
             throw result.error;
         }
-        console.log(result)
         return result;
     } catch (error) {
         console.error("Uh oh, trouble registering user");
