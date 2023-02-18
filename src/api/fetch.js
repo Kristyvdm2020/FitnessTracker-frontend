@@ -228,7 +228,45 @@ const createRoutine = async (name, goal, isPublic) => {
     }
 }
 
+//PATCH /api/routine_activities/:routineActivityId (**)
+//Something is not quite right here yet...just letting you know
+const updateRoutineActivity = async ({routineActivityId, ...fields }) => {
+    try {
+        const token = window.localStorage.getItem("token");
+        let response = await fetch(`http://fitnesstrac-kr.herokuapp.com/api/routine_activities/${routineActivityId}`, {
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({...fields})
+        });
+        let result = await response.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+        console.error("Error updating the activity count or duration");
+    }
+}
 
+//DELETE /api/routine_activities/:routineActivityId (**)
+const deleteRoutineActivity = async (id) => {
+    try {
+        const token = window.localStorage.getItem("token");
+        let response = await fetch(`http://fitnesstrac-kr.herokuapp.com/api/routine_activities/${id}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        let result = await response.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+        console.error("Error deleting routine activity");
+    }
+}
 
 
 
@@ -244,5 +282,7 @@ module.exports =
     fetchAllRoutines, 
     createRoutine, 
     attachActivityToRoutine,
-    updateMyRoutine
+    updateMyRoutine,
+    updateRoutineActivity, 
+    deleteRoutineActivity
 };
