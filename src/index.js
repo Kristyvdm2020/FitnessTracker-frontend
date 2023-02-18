@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, Routes, Route, HashRouter} from 'react-router-dom';
+import { Link, NavLink, Routes, Route, HashRouter} from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { loginUser } from './api/fetch'; //this is only here right now for getting a token for development
 import { getUser, fetchUsernameRoutines, fetchAllActivities, fetchAllRoutines } from './api/fetch'
@@ -73,8 +73,8 @@ const App = ()=> {
             <button className='logout-btn' onClick={ logout }>Logout</button></>: null}
           </div>
           <div className='login-register'>
-            <NavLink to='/Login'><button className='login-btn'>Login</button></NavLink>
-            <NavLink to='/Register'><button className='login-btn'>Register</button></NavLink>
+            <Link to='/Login'><button className='login-btn'>Login</button></Link>
+            <Link to='/Register'><button className='login-btn'>Register</button></Link>
           </div>
         </div>
         <div className='logo-nav'>       
