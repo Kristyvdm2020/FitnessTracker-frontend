@@ -23,7 +23,7 @@ export const CreateRoutine = (props) => {
             clearForm();
             setMessage({message: "Success!"});
             const redirectToRoutines = () => {
-                window.location.href = '/myroutines'
+                window.location.href = '/#/myroutines'
             }
             redirectToRoutines();
         } else {

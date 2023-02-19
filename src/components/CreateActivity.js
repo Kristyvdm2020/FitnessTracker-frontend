@@ -11,12 +11,12 @@ const [message, setMessage] = useState({});
         ev.preventDefault();
         const response = await createActivity(name, description);
         if (!response.error) {
-            const allActivities = await fetchAllActivities;
+            const allActivities = await fetchAllActivities();
             setActivities(allActivities);
             clearForm();
             setMessage({message: "Success!"});
             const redirectToActivities = () => {
-                window.location.href = '/activities'
+                window.location.href = '/#/activities'
             }
             redirectToActivities();
         } else {

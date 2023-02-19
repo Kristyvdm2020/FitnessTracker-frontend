@@ -22,7 +22,7 @@ export const ViewLogin = (props) => {
                 setMessage({ message: 'Login successful!'});
                 setUser(response.user);
                 const redirecthome = () => {
-                    window.location.href = '/home';
+                    window.location.href = '/#/';
                 }
                 redirecthome();
             } else {
