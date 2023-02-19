@@ -160,6 +160,15 @@ nav a:hover {
   height: auto;
   /* clip-path: polygon(0 0, 100% 12%, 100% 76%, 0 100%); */
   clip-path: polygon(0 25%, 100% 12%, 100% 76%, 0 92%);
+}
+
+.missionStatement {
+  border-radius: 15px;
+  padding: 25px;
+  border: 1px solid #42E6A4; 
+  background-color: #ffffff;
+  color:  #2dc186;
+  box-shadow: 2px 5px 2px 1px rgb(233, 233, 233);
 
 }
 
