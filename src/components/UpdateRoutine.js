@@ -51,28 +51,31 @@ const UpdateRoutine = (props) => {
         )
     } else {
         return(
-            <>
+            <div className='add-container'>
                 <form onSubmit={editRoutine}>
                     <input
                         placeholder="name"
                         value={name}
                         onChange={(ev) => setName((ev.target.value))}
                     />
+                    <br />
                     <input
                         placeholder="goal"
                         value={goal}
                         onChange={(ev) => setGoal((ev.target.value))}
                     />
+                    <br />
                     <select
                         value={isPublic}
                         onChange={(ev) => setIsPublic(ev.target.value)}>
                         <option value="true">Public</option>
                         <option value="false">Private</option>
                     </select>
-                    <button type="submit">Finish</button>
+                    <br />
+                    <button className='btn' type="submit">Finish</button>
                 </form> 
                 {error.message && <p>{error.message}</p>} 
-            </>  
+            </div>  
         )
     }
 }

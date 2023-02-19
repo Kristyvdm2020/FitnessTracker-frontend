@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {fetchUsernameRoutines, deleteRoutine} from '../api/fetch';
+import { FaTrashAlt } from 'react-icons/fa';
 
 
 
@@ -25,12 +26,12 @@ const AllMyRoutines = (props) => {
     return (
         <div className='body-container' id='routines-collection'>
             <ul id='routines'>
-            <Link to='/newroutine'><button className='login-btn'>New Routine</button></Link>
+            <Link to='/newroutine'className='new-routine'><button className='routine-btn'>New Routine</button></Link>
                 {
                     myRoutines.map(routine => {
                         return (
                             <li key={routine.id}>
-                                <Link to={`/myRoutines/${routine.id}`}>{routine.name}</Link> <button value="hi" onClick={() => deleteMyRoutine(routine.id)}>Delete</button> </li>
+                                <Link to={`/myRoutines/${routine.id}`}>{routine.name}</Link> <button className='delete-btn' onClick={() => deleteMyRoutine(routine.id)}><FaTrashAlt /></button> </li>
                         )
                     })
                 }

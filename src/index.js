@@ -66,8 +66,9 @@ const App = ()=> {
 
         <div className='top-container'>
           <div className='user-display'>
-            { user.username ? <><div className='icon'></div>
-            <p>Hi {user.username}!</p>
+            { user.username ? <><div className='user'>
+              <p>Hi {user.username}!</p></div>
+            
             <button className='logout-btn' onClick={ logout }>Logout</button></>: null}
           </div>
           <div className='login-register'>

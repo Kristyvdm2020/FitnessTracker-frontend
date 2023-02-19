@@ -6,7 +6,7 @@ export const ViewRegister = ({setToken}) => {
     const [password, setPassword] = useState('');
 
     return (
-        <div className='body-container' id="register">
+        <div className='form-card' id="register">
             <h1>Create your WERKIT account!</h1>
             <form onSubmit={async(ev) => { 
         try {
@@ -28,13 +28,15 @@ export const ViewRegister = ({setToken}) => {
           value={username}
           onChange={(ev) => setUsername(ev.target.value)}
         />
+        <p />
         <input
           placeholder="password"
           type={'password'}
           value={password}
           onChange={(ev) => setPassword(ev.target.value)}
         />
-    <button disabled ={!username || !password}>Create Account</button>
+        <p />
+    <button className="btn" disabled ={!username || !password}>Create Account</button>
 </form>
         </div>
     )
