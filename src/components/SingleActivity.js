@@ -13,7 +13,7 @@ const SingleActivity = (props) => {
         )
     } else {
         return (
-            <div className='body-container' id='singleActivity'>
+            <div id='singleActivity'>
                 <h1><Link to='/activities'>{activity.name}</Link></h1>
                 <h2>{activity.description}</h2>
             </div>

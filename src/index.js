@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Routes, Route, HashRouter} from 'react-router-dom';
+import { Link, NavLink, Routes, Route, HashRouter} from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { loginUser } from './api/fetch'; //this is only here right now for getting a token for development
 import { getUser, fetchUsernameRoutines, fetchAllActivities, fetchAllRoutines } from './api/fetch'
@@ -7,6 +7,7 @@ import { ViewRegister } from './components/ViewRegister';
 import { ViewLogin } from './components/ViewLogin';
 import AllActivities from './components/AllActivities';
 import SingleActivity from './components/SingleActivity';
+import { CreateRoutine } from './components/CreateRoutine';
 import SingleRoutine from './components/SingleRoutine';
 import AllRoutines from './components/AllRoutines';
 import MyOneRoutine from './components/MyOneRoutine';
@@ -15,13 +16,11 @@ import Home from './components/Home';
 
 const App = ()=> {
 
-  loginUser("Kristy", "12345678");
+ 
   const [activities, setActivities] = useState([]);
   const [routines, setRoutines] = useState([]);
   const [user, setUser] = useState({});
   const [myRoutines, setMyRoutines] = useState([]);
-
-
 
   const loadUsernameRoutines = async () => {
     const allMyRoutines = await fetchUsernameRoutines(user.username);
@@ -67,8 +66,9 @@ const App = ()=> {
 
         <div className='top-container'>
           <div className='user-display'>
-            { user.username ? <><div className='icon'></div>
-            <p>Hi {user.username}!</p>
+            { user.username ? <><div className='user'>
+              <p>Hi {user.username}!</p></div>
+            
             <button className='logout-btn' onClick={ logout }>Logout</button></>: null}
           </div>
           <div className='login-register'>
@@ -81,10 +81,10 @@ const App = ()=> {
               <p>Werkit</p>
             </div>
           <nav>
-            <Link to='/'>HOME</Link>
-            <Link to='/Activities'>ACTIVITIES</Link>
-            <Link to='/Routines'>ROUTINES</Link>
-            <Link to='/MyRoutines'>MY ROUTINES</Link>
+            <NavLink to='/'>HOME</NavLink>
+            <NavLink to='/Activities'>ACTIVITIES</NavLink>
+            <NavLink to='/Routines'>ROUTINES</NavLink>
+            <NavLink to='/MyRoutines'>MY ROUTINES</NavLink>
 
           </nav>
         </div>  
@@ -92,9 +92,9 @@ const App = ()=> {
       </header>
       <Routes>
         <Route path='/Register' element={<ViewRegister />} />
-        <Route path='/Login' element={<ViewLogin />} />
+        <Route path='/Login' element={<ViewLogin  />} />
         {/* <Route path='/Activity' element={<CreateActivity />} /> */}
-        {/* <Route path='/Activity' element={<CreateRoutine />} /> */}
+        <Route path='/newroutine' element={<CreateRoutine  user={user} myRoutines={myRoutines} setMyRoutines={setMyRoutines} />} />
         <Route path='/activities/:id' element={
           <SingleActivity activities={activities} />
         } />
@@ -111,7 +111,7 @@ const App = ()=> {
           <MyOneRoutine user={user} myRoutines={myRoutines} activities={activities} setMyRoutines={setMyRoutines} />
         } />
         <Route path='/myroutines' element={
-          <AllMyRoutines myRoutines={myRoutines} />
+          <AllMyRoutines user={user} myRoutines={myRoutines} setMyRoutines={setMyRoutines} />
         } />
         <Route path='/' element={
           <Home />

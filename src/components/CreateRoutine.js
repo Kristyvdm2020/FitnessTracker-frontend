@@ -1,10 +1,56 @@
 import React, {useState} from "react";
+import {fetchUsernameRoutines, createRoutine} from '../api/fetch';
+import { Link, useParams  } from 'react-router-dom';
 
-export const CreateRoutine = () => {
+
+export const CreateRoutine = (props) => {
+    const [name, setName] = useState('')
+    const [goal, setGoal] = useState('');
+    const [isPublic, setIsPublic] = useState(false)
+    const { user, myRoutines, setMyRoutines } = props;
+    const [error, setError] = useState({});
+    const id  = Number(useParams().id);
+    let routine = myRoutines.find(routine => routine.id === id);
+
+    
+    const newRoutine = async (ev) => {
+        ev.preventDefault();
+        const response = await createRoutine(name, goal, isPublic);
+        if (!response.error) {
+            const allMyRoutines = await fetchUsernameRoutines(user.username);
+            setMyRoutines(allMyRoutines);
+            routine = myRoutines.find(routine => routine.id === id);
+            clearForm();
+        } else {
+            console.log(error)
+            setError(response);
+        }
+    }
+
+    const clearForm = () => {
+        setName('');
+        setGoal('');
+        setIsPublic(false)
+    }
 
 return (
-
-    <h1 className='body-container'>Tell us about your routine!</h1>
+    <div className="form-card">
+        <h1>Create a new routine here!</h1>
+        <form onSubmit={newRoutine}>
+        <p />
+        <input placeholder="name" value={name} onChange = {(ev) => 
+            setName(ev.target.value)}></input>
+        <p />
+        <input placeholder="goal" value={goal} onChange = {(ev) => 
+            setGoal(ev.target.value)}></input>
+        <p />
+        <input placeholder="true or false" value={isPublic} onChange = {(ev) => 
+            setIsPublic(ev.target.value)}></input>
+        <p />
+        <button className="btn" type="submit">New Routine</button>
+        </form>
+        
+    </div>
 
 )
 }

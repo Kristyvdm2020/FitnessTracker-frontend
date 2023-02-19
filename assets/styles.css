@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
 body {
   font-family: 'Ubuntu', sans-serif;
-  justify-content: center;
 }
 
 .app {
@@ -13,6 +13,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .user-display{
@@ -38,20 +39,36 @@ body {
   align-items: center;
 }
 
-/* .icon {
-  height: 45px;
-  width: 45px;
-  margin-bottom: 5px;
-  margin-right: 5px;
-  background-color:#D65DB1;
-  border-radius: 5px;
-} */
+.container::after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  box-shadow: inset 0 0 0 1000px #32007d20;
+
+  background-image: url('https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
+  /*background-repeat: no-repeat;*/
+  background-size: cover;
+  background-position: top center;
+  opacity: 0.9;
+} 
+
+.user {
+  color: whitesmoke;
+} 
 
 .logo {
   width: 80vw;
-  height: 70px;
+  height: 100px;
   margin-bottom: 25px;
-  background-color: rgb(43, 43, 63);
+  background-image: url('https://t4.ftcdn.net/jpg/04/23/87/53/360_F_423875308_S4w1IW5aReFvYzMGt4bj98GgvEmVKHnd.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  /* background-color: rgb(43, 43, 63); */
   color: rgb(255, 255, 255);
   border-radius: 5px;
 
@@ -61,7 +78,7 @@ div.logo p {
   font-size: 40px;  
   margin: 0px;
   display: flex;
-  height: 70px;
+  height: 100px;
   align-items: center;
   flex-direction: column;
   justify-content: center;
@@ -93,11 +110,12 @@ div.logo p {
 
 nav {
   width: 75vw;
-  height: 50px;
+  height: auto;
   color: rgb(255, 255, 255);
   text-align: center;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
 
 }
@@ -114,10 +132,19 @@ nav a {
 
 }
 
+.active {
+  background-color: #A555EC;
+  border: 1px solid #A555EC;
+  color: white;
+
+}
+
+
 nav a:hover {
   background-color: #FF6F91;
+  border: 1px solid #FF6F91;  
   color: white;
-  box-shadow: 2px 5px 2px 1px rgb(233, 233, 233);
+  box-shadow: 2px 5px 2px 1px rgb(80, 80, 80);;
 }
 
 /*----- Main Body -----*/
@@ -129,29 +156,275 @@ nav a:hover {
   min-height: 40vh;
   border-radius: 5px;
   background-color: #e5e5e5;
-  border: 1px solid #bcbcbc;
+  border: 1px solid #e5e5e5;
+}
+/*----- Home -----*/
+
+.home-container {
+  width: 60vw;
+  min-height: 40vh;
+  text-align: center;
+}
+.home-img {
+  margin-top: -39px;;
+  max-width: 80%;;
+  height: auto;
+  /* clip-path: polygon(0 0, 100% 12%, 100% 76%, 0 100%); */
+  clip-path: polygon(0 25%, 100% 12%, 100% 76%, 0 92%);
+}
+
+.missionStatement {
+  border-radius: 15px;
+  padding: 25px;
+  border: 1px solid #42E6A4; 
+  background-color: #ffffff;
+  color:  #2dc186;
+  box-shadow: 2px 5px 2px 1px rgb(80, 80, 80);;
+
 }
 
 /*----- Activities -----*/
 
 #activities-collection {
   font-size: 1rem;
+  overflow-y: scroll;
+  height: 645px;
+}
+
+
+#activities-collection::-webkit-scrollbar {
+  width: 10px;
+}
+#activities-collection::-webkit-scrollbar-thumb{
+  border-radius: 20px;
+  background:  #FF6F91;
 }
 
 #activities {
+  padding: 0;
   list-style-type: none;
 }
 
 #activities>li {
-  /* background-color: greenyellow;
-  border-radius: 1rem; */
-  margin: 1rem;
+  background-color: whitesmoke;
+  border: 1px solid whitesmoke;
+  border-radius: 15px;;
+  padding: 20px;
+  margin: 20px;
 }
 
-#singleActivity {
-  background-color: greenyellow;
-  border-radius: 1rem;
-  margin: 1rem;
+#activities a {
+  text-decoration: none;
+  color: #A555EC;
+
+}
+
+#activities a:hover {
+  text-decoration: underline;
+}
+
+#singleActivity, #singleRoutine {
+  background-color: rgb(249, 249, 249);
+  box-shadow: 2px 5px 2px 1px rgb(80, 80, 80);
+  width: 60vw;
+  border-radius: 15px;;
+  height: 600px;
+  padding: 0 20px 20px 20px;
+  margin: 13px;
+  overflow-y: scroll;
+}
+
+#singleActivity::-webkit-scrollbar , #singleRoutine::-webkit-scrollbar  {
+  width: 10px;
+}
+#singleActivity::-webkit-scrollbar-thumb , #singleRoutine::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background:  #FF6F91;
+}
+
+#singleActivity a, #singleRoutine a {
+  color: #A555EC;
+  margin-right: 15px;
+  text-decoration: none;
 }
 
 /*----- Routines -----*/
+
+#routines {
+  padding: 0;
+  list-style-type: none;
+  overflow-y: scroll;
+  height: 613px;
+}
+
+#routines::-webkit-scrollbar {
+  width: 10px;
+}
+#routines::-webkit-scrollbar-thumb{
+  border-radius: 20px;
+  background:  #FF6F91;
+}
+
+.new-routine {
+  display:flex; 
+  justify-content:flex-end; 
+  align-items:center;  
+  margin-right: 20px;
+}
+
+.new-routine:hover {
+  text-decoration: none;
+}
+
+.routine-btn:hover {
+  text-decoration: none;
+}
+
+.routine-btn {
+  cursor: pointer;
+  padding: 15px 25px;
+  border-radius: 5px;
+  border-style: none;
+  margin-left: 20px;
+  color: #F9F7FF;
+  background-color: #00B2C2;
+}
+
+#routines li {
+  background-color: whitesmoke;
+  border: 1px solid whitesmoke;
+  border-radius: 15px;;
+  padding: 20px;
+  margin: 20px;
+}
+
+#routines a {
+  text-decoration: none;
+  color: #A555EC;
+}
+
+#routines a:hover {
+  text-decoration: underline;
+}
+
+#singleRoutine li {
+  list-style-type: circle;
+}
+
+/*----- MISC templates -----*/
+
+.delete-btn {
+  margin-top: -7px;
+  float: right;
+  margin-left: 10px;
+  cursor: pointer;
+  height: 30px;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 15px;
+}
+
+.delete-btn svg {
+  width: 15px;
+  height: auto;
+  color: #FF6F91;
+}
+
+.edit-btn {
+  margin-top: -7px;
+  float: right;
+  cursor: pointer;
+  height: 30px;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 15px;
+}
+
+.edit-btn svg  {
+  width: 15px;
+  height: auto;
+  color: #8ee982;
+  margin-right: -5px;
+}
+
+.big-edit-btn {
+margin-top: -50px;
+  cursor: pointer;
+  height: 35px;
+  width: 35px;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 20px;
+}
+
+.big-edit-btn svg {
+  width: 20px;
+  height: auto;
+  color: #8ee982;
+  margin-right: -5px;
+}
+
+.small-btn {
+  width: 100px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  border: 1px solid  #8ee982;
+  background-color:  #8ee982;
+  color: white;
+}
+
+.form-card {
+  background-color: rgb(249, 249, 249);
+  box-shadow: 2px 5px 2px 1px rgb(80, 80, 80);
+  width: 30vw;
+  border-radius: 15px;;
+  min-height: 40vh;
+  padding: 20px;
+  margin: 20px;
+  text-align: center;
+}
+
+.form-card h1 {
+  margin-bottom: 40px;
+}
+
+input{
+  width: 320px;
+  padding: 10px 10px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+input:focus {
+  outline: none;
+  border-bottom: 1px solid #FF6F91;
+}
+
+select {
+  width: 320px;
+  padding: 10px 10px;
+  margin: 10px;
+  border: none;
+}
+
+select:focus {
+  outline: none;
+  border-bottom: 1px solid #FF6F91;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 15px 50px;
+  border-radius: 5px;
+  border-style: none;
+  margin-left: 20px;
+  color: #F9F7FF;
+  background-color: #8ee982;
+}
+
+.add-container{
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
