@@ -12,7 +12,7 @@ export const ViewRegister = ({setToken}) => {
         try {
             ev.preventDefault();
             const token = await registerUser(username, password);
-           setToken(token);
+            window.localStorage.setItem('token', token.token);
            console.log('register success');
             // const redirectlogin = () => {
             // }
