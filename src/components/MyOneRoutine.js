@@ -41,11 +41,13 @@ const MyOneRoutine = (props) => {
     }
 
     const deleteActivityFromRoutine = async (ev) => {
+        //console.log(ev.target)
         let response = await deleteRoutineActivity(Number(ev.target.value));
         if (!response.error) {
             const allMyRoutines = await fetchUsernameRoutines(user.username);
             setMyRoutines(allMyRoutines);
             routine = myRoutines.find(routine => routine.id === id);
+            console.log("success!");
         } else {
             setError(response);
         }
@@ -78,14 +80,14 @@ const MyOneRoutine = (props) => {
                     {routine.activities.map(activity => {
                         //console.log(activity);
                         return (<li key={activity.id}>{activity.name}(Count:{activity.count} Duration:{activity.duration})
-                                                        <button
-                                value={activity.routineActivityId} 
+                            <button
+                                value={activity.routineActivityId}
                                 className='delete-btn'
-                                onClick={deleteActivityFromRoutine}><FaTrashAlt /></button>
+                                onClick={(ev) => deleteActivityFromRoutine(ev)}><FaTrashAlt /></button>
                             <button
                                 value={activity.routineActivityId}
                                 className='edit-btn'
-                                onClick={(ev) =>setUpEditActivityForm(ev, activity.routineActivityId)}><FaEdit /></button>
+                                onClick={(ev) => setUpEditActivityForm(ev, activity.routineActivityId)}><FaEdit /></button>
 
                             <p>{activity.description}</p>
                             {error.message && <p>{error.message}</p>}
