@@ -10,9 +10,10 @@ const MyOneRoutine = (props) => {
     const { user, myRoutines, activities, setMyRoutines } = props;
     const [editRoutineForm, setEditRoutineForm] = useState(false);
     const [editActivityForm, setEditActivityForm] = useState(false);
-    const [count, setCount] = useState(0);
-    const [duration, setDuration] = useState(0);
+    const [count, setCount] = useState('');
+    const [duration, setDuration] = useState('');
     const [routineActivityId, setRoutineActivityId] = useState(0);
+    const [editedActivity, setEditedActivity] = useState('');
     const [error, setError] = useState({});
     const id  = Number(useParams().id);
     let routine = myRoutines.find(routine => routine.id === id);
@@ -40,9 +41,8 @@ const MyOneRoutine = (props) => {
         }
     }
 
-    const deleteActivityFromRoutine = async (ev) => {
-        //console.log(ev.target)
-        let response = await deleteRoutineActivity(Number(ev.target.value));
+    const deleteActivityFromRoutine = async (ev, id) => {
+        let response = await deleteRoutineActivity(id);
         if (!response.error) {
             const allMyRoutines = await fetchUsernameRoutines(user.username);
             setMyRoutines(allMyRoutines);
@@ -53,9 +53,10 @@ const MyOneRoutine = (props) => {
         }
     }
 
-    const setUpEditActivityForm = async (ev,activityId) => {
-        setRoutineActivityId(ev.target.value);
-        setEditActivityForm(!editActivityForm);
+    const setUpEditActivityForm = async (ev, id, name) => {
+        setRoutineActivityId(id);
+        setEditActivityForm(true);
+        setEditedActivity(name);
     }
 
     const clearForm = () => {
@@ -78,38 +79,43 @@ const MyOneRoutine = (props) => {
                 <p><b>Activities({routine.activities.length})</b></p>
                 <ul>
                     {routine.activities.map(activity => {
-                        //console.log(activity);
                         return (<li key={activity.id}>{activity.name}(Count:{activity.count} Duration:{activity.duration})
                             <button
                                 value={activity.routineActivityId}
                                 className='delete-btn'
-                                onClick={(ev) => deleteActivityFromRoutine(ev)}><FaTrashAlt /></button>
+                                onClick={(ev) => deleteActivityFromRoutine(ev, activity.routineActivityId)}><FaTrashAlt /></button>
                             <button
                                 value={activity.routineActivityId}
                                 className='edit-btn'
-                                onClick={(ev) => setUpEditActivityForm(ev, activity.routineActivityId)}><FaEdit /></button>
+                                onClick={(ev) => setUpEditActivityForm(ev, activity.routineActivityId, activity.name)}><FaEdit /></button>
 
                             <p>{activity.description}</p>
                             {error.message && <p>{error.message}</p>}
-                            {editActivityForm ?
-                                <form onSubmit={editRoutineActivity}>
-                                    <input
-                                        placeholder="count"
-                                        value={count}
-                                        onChange={(ev) => setCount(ev.target.value)}
-                                    />
-                                    <input
-                                        placeholder="duration"
-                                        value={duration}
-                                        onChange={(ev) => setDuration(ev.target.value)}
-                                    />
-
-                                    <button className='small-btn' type="submit">Done!</button>
-                                </form>
-                                : null}
+                            
                         </li>)
                     })}
                 </ul>
+                <>
+                {editActivityForm ?
+                    <form onSubmit={editRoutineActivity}>
+                        <h3>Change Count or Duration of {editedActivity}</h3>
+                        <p>Count:</p>
+                        <input
+                            placeholder="count"
+                            value={count}
+                            onChange={(ev) => setCount(Number(ev.target.value))}
+                        />
+                        <p>Duration:</p>
+                        <input
+                            placeholder="duration"
+                            value={duration}
+                            onChange={(ev) => setDuration(Number(ev.target.value))}
+                        />
+
+                        <button className='small-btn' type="submit">Done!</button>
+                    </form>
+                    : null}
+                </>
                 <AddActivityToRoutine user={user} myRoutines={myRoutines} activities={activities} setMyRoutines={setMyRoutines} />
             </div>
         )
