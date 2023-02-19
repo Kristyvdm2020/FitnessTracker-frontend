@@ -17,7 +17,6 @@ export const CreateRoutine = (props) => {
         ev.preventDefault();
         const response = await createRoutine(name, goal, isPublic);
         if (!response.error) {
-            console.log('yay')
             const allMyRoutines = await fetchUsernameRoutines(user.username);
             setMyRoutines(allMyRoutines);
             routine = myRoutines.find(routine => routine.id === id);

@@ -6,7 +6,7 @@ const Home = () => {
         <div className='home-container'>
            
                 <img className='home-img' src="https://cdn.thespaces.com/wp-content/uploads/2020/01/Gymshark-hero-crop.jpg"/>
-                <p class="missionStatement">Donec ac odio tempor orci dapibus ultrices in iaculis. Donec massa sapien faucibus et molestie ac feugiat. Amet porttitor eget dolor morbi non arcu. Ultrices vitae auctor eu augue ut lectus arcu.             
+                <p className="missionStatement">Donec ac odio tempor orci dapibus ultrices in iaculis. Donec massa sapien faucibus et molestie ac feugiat. Amet porttitor eget dolor morbi non arcu. Ultrices vitae auctor eu augue ut lectus arcu.             
                 Tellus mauris a diam maecenas sed enim ut sem viverra. Bibendum est ultricies integer quis. 
                 Tellus cras adipiscing enim eu turpis egestas pretium. Netus et malesuada fames ac turpis egestas integer eget aliquet. Facilisi cras fermentum odio eu feugiat pretium nibh ipsum consequat.
                 Diam quis enim lobortis scelerisque fermentum dui. Tempus imperdiet nulla malesuada pellentesque elit eget gravida. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam.
