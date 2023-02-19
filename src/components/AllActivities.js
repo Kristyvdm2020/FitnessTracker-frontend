@@ -7,6 +7,7 @@ const AllActivities = (props) => {
     return (
         <div className='body-container' id='activities-collection'>
             <ul id='activities'>
+            <Link to='/newactivity'className='new-routine'><button className='routine-btn'>New Activity</button></Link>
                 {
                     activities.map(activity => {
                         return (

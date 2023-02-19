@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, Routes, Route, HashRouter} from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import { loginUser } from './api/fetch'; //this is only here right now for getting a token for development
 import { getUser, fetchUsernameRoutines, fetchAllActivities, fetchAllRoutines } from './api/fetch'
 import { ViewRegister } from './components/ViewRegister';
 import { ViewLogin } from './components/ViewLogin';
+import { CreateActivity } from './components/CreateActivity';
 import AllActivities from './components/AllActivities';
 import SingleActivity from './components/SingleActivity';
 import { CreateRoutine } from './components/CreateRoutine';
@@ -93,7 +93,7 @@ const App = ()=> {
       <Routes>
         <Route path='/Register' element={<ViewRegister />} />
         <Route path='/Login' element={<ViewLogin  />} />
-        {/* <Route path='/Activity' element={<CreateActivity />} /> */}
+        <Route path='/newactivity' element={<CreateActivity />} />
         <Route path='/newroutine' element={<CreateRoutine  user={user} myRoutines={myRoutines} setMyRoutines={setMyRoutines} />} />
         <Route path='/activities/:id' element={
           <SingleActivity activities={activities} />

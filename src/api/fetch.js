@@ -105,7 +105,6 @@ const updateMyRoutine = async ({routineId, ...fields}) => {
     }
 }
 
-///----------API FUNCTIONS THAT ARE NOT ACTIVELY USED ARE BELOW THIS LINE, but can be used ----------------------
 //User fetch requests
 //POST /api/users/register
 const registerUser = async (username, password) => {
@@ -176,6 +175,7 @@ const createActivity = async (name, description) => {
         if (result.error) {
             throw result.error;
         }
+        console.log(result);
         return result;
     } catch (error) {
         console.error("Uh oh, trouble creating activity");
