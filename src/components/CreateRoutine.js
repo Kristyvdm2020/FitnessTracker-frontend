@@ -22,6 +22,10 @@ export const CreateRoutine = (props) => {
             routine = myRoutines.find(routine => routine.id === id);
             clearForm();
             setMessage({message: "Success!"});
+            const redirectToRoutines = () => {
+                window.location.href = '/myroutines'
+            }
+            redirectToRoutines();
         } else {
             setMessage(response);
         }

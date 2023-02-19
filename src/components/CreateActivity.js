@@ -15,8 +15,11 @@ const [message, setMessage] = useState({});
             setActivities(allActivities);
             clearForm();
             setMessage({message: "Success!"});
+            const redirectToActivities = () => {
+                window.location.href = '/activities'
+            }
+            redirectToActivities();
         } else {
-            // console.log(error)
             setMessage(response);
         }
     }

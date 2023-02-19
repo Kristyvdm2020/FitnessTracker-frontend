@@ -21,10 +21,13 @@ export const ViewLogin = (props) => {
                 window.localStorage.setItem('token', response.token);
                 setMessage({ message: 'Login successful!'});
                 setUser(response.user);
+                const redirecthome = () => {
+                    window.location.href = '/home';
+                }
+                redirecthome();
             } else {
                 setMessage(response);
-            }
-            
+            } 
         }
         catch (error){
             console.error(error);
