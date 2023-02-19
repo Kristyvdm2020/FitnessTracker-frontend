@@ -9,7 +9,7 @@ export const ViewLogin = ({setToken}) => {
 
     return (
 
-<div className='body-container' id="login">
+<div className='form-card' id="login">
     <h1>Login to WerkIT</h1>
     <form onSubmit={async(ev) => {
         
@@ -28,14 +28,15 @@ export const ViewLogin = ({setToken}) => {
             value={username}
             onChange={(ev) => setUsername(ev.target.value)}
             />
+            <p />
         <input
             placeholder="password"
             type={'password'}
             value={password}
             onChange={(ev) => setPassword(ev.target.value)}
             />
-            
-        <button disabled ={!username || !password}>Log In</button> 
+            <p />
+        <button className="btn" disabled ={!username || !password}>Log In</button> 
         {/* Grays out button if there is no input ^^^^ */}
 
     </form>

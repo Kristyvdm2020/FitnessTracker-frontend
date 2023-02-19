@@ -34,19 +34,20 @@ export const CreateRoutine = (props) => {
     }
 
 return (
-    <div>
+    <div className="form-card">
         <h1>Create a new routine here!</h1>
         <form onSubmit={newRoutine}>
-    
+        <p />
         <input placeholder="name" value={name} onChange = {(ev) => 
             setName(ev.target.value)}></input>
-    
+        <p />
         <input placeholder="goal" value={goal} onChange = {(ev) => 
             setGoal(ev.target.value)}></input>
-
+        <p />
         <input placeholder="true or false" value={isPublic} onChange = {(ev) => 
             setIsPublic(ev.target.value)}></input>
-        <button type="submit">New Routine</button>
+        <p />
+        <button className="btn" type="submit">New Routine</button>
         </form>
         
     </div>

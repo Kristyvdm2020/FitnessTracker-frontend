@@ -37,7 +37,7 @@ const AddActivityToRoutine = (props) => {
         )
     } else {
         return(
-            <>
+            <div className='add-container'>
                 <h3>Add an Activity:</h3>
                 <div>
                     <form onSubmit={addActivity}>
@@ -54,23 +54,25 @@ const AddActivityToRoutine = (props) => {
                                 })
                             }
                         </select>
+                        <br />
                         <input
                             placeholder="count"
                             value={count}
                             onChange={(ev) => setCount(Number(ev.target.value))}
                         />
+                        <br />
                         <input
                             placeholder="duration"
                             value={duration}
                             onChange={(ev) => setDuration(Number(ev.target.value))}
                         />
-
-                        <button disabled={selectedActivityId === '' || count === '' || duration === ''} type="submit">
+                        <br />
+                        <button className='btn' disabled={selectedActivityId === '' || count === '' || duration === ''} type="submit">
                             Add Activity</button>
                     </form>
                     {error.message && <p>{error.message}</p>}
                 </div>
-            </>
+            </div>
         )
     }
 }
