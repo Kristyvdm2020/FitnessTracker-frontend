@@ -2,6 +2,12 @@
 body {
   font-family: 'Ubuntu', sans-serif;
   justify-content: center;
+/* 
+  &::before {
+    content: '';
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
 }
 
 .app {

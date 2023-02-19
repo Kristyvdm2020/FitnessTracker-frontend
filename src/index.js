@@ -110,7 +110,7 @@ const App = ()=> {
           <MyOneRoutine user={user} myRoutines={myRoutines} activities={activities} setMyRoutines={setMyRoutines} />
         } />
         <Route path='/myroutines' element={
-          <AllMyRoutines myRoutines={myRoutines} />
+          <AllMyRoutines user={user} myRoutines={myRoutines} setMyRoutines={setMyRoutines} />
         } />
         <Route path='/' element={
           <Home />

@@ -269,6 +269,25 @@ const deleteRoutineActivity = async (id) => {
 }
 
 
+const deleteRoutine = async (id) => {
+    try {
+        const token = window.localStorage.getItem("token");
+        let response = await fetch(`http://fitnesstrac-kr.herokuapp.com/api/routines/${id}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        let result = await response.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+        console.error("Error deleting routine");
+    }
+}
+
+
 
 module.exports = 
 { 
@@ -284,5 +303,6 @@ module.exports =
     attachActivityToRoutine,
     updateMyRoutine,
     updateRoutineActivity, 
-    deleteRoutineActivity
+    deleteRoutineActivity,
+    deleteRoutine
 };
