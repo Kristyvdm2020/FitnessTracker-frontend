@@ -95,7 +95,7 @@ const MyOneRoutine = (props) => {
                         </li>)
                     })}
                 </ul>
-                <>
+                <div className='add-container'>
                 {editActivityForm ?
                     <form onSubmit={editRoutineActivity}>
                         <h3>Change Count or Duration of {editedActivity}</h3>
@@ -111,11 +111,11 @@ const MyOneRoutine = (props) => {
                             value={duration}
                             onChange={(ev) => setDuration(Number(ev.target.value))}
                         />
-
+                        <p></p>
                         <button className='small-btn' type="submit">Done!</button>
                     </form>
                     : null}
-                </>
+                </div>
                 <AddActivityToRoutine user={user} myRoutines={myRoutines} activities={activities} setMyRoutines={setMyRoutines} />
             </div>
         )
