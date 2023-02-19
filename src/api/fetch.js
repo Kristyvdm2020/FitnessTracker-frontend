@@ -167,10 +167,6 @@ const createActivity = async (name, description) => {
             })
         })
         let result = await response.json();
-        if (result.error) {
-            throw result.error;
-        }
-        console.log(result);
         return result;
     } catch (error) {
         console.error("Uh oh, trouble creating activity");
@@ -213,9 +209,6 @@ const createRoutine = async (name, goal, isPublic) => {
             })
         })
         let result = await response.json();
-        if (result.error) {
-            throw result.error;
-        }
         return result;
     } catch (error) {
         console.log(error);
@@ -224,7 +217,6 @@ const createRoutine = async (name, goal, isPublic) => {
 }
 
 //PATCH /api/routine_activities/:routineActivityId (**)
-//Something is not quite right here yet...just letting you know
 const updateRoutineActivity = async ({routineActivityId, ...fields }) => {
     try {
         const token = window.localStorage.getItem("token");

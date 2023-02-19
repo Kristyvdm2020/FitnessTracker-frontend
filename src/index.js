@@ -71,10 +71,12 @@ const App = ()=> {
             
             <button className='logout-btn' onClick={ logout }>Logout</button></>: null}
           </div>
-          <div className='login-register'>
-            <Link to='/Login'><button className='login-btn'>Login</button></Link>
-            <Link to='/Register'><button className='login-btn'>Register</button></Link>
-          </div>
+          {!user.username ?
+            <div className='login-register'>
+              <Link to='/Login'><button className='login-btn'>Login</button></Link>
+              <Link to='/Register'><button className='login-btn'>Register</button></Link>
+            </div>
+            : null}
         </div>
         <div className='logo-nav'>       
           <div className='logo'>
@@ -93,7 +95,7 @@ const App = ()=> {
       <Routes>
         <Route path='/Register' element={<ViewRegister />} />
         <Route path='/Login' element={<ViewLogin  setUser={setUser}/>} />
-        <Route path='/newactivity' element={<CreateActivity />} />
+        <Route path='/newactivity' element={<CreateActivity setActivities={setActivities}/>} />
         <Route path='/newroutine' element={<CreateRoutine  user={user} myRoutines={myRoutines} setMyRoutines={setMyRoutines} />} />
         <Route path='/activities/:id' element={
           <SingleActivity activities={activities} />

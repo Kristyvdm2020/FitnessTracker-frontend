@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {fetchUsernameRoutines, createRoutine} from '../api/fetch';
-import { Link, useParams  } from 'react-router-dom';
+import { useParams  } from 'react-router-dom';
 
 
 export const CreateRoutine = (props) => {
@@ -8,7 +8,7 @@ export const CreateRoutine = (props) => {
     const [goal, setGoal] = useState('');
     const [isPublic, setIsPublic] = useState(false)
     const { user, myRoutines, setMyRoutines } = props;
-    const [error, setError] = useState({});
+    const [message, setMessage] = useState({});
     const id  = Number(useParams().id);
     let routine = myRoutines.find(routine => routine.id === id);
 
@@ -21,16 +21,16 @@ export const CreateRoutine = (props) => {
             setMyRoutines(allMyRoutines);
             routine = myRoutines.find(routine => routine.id === id);
             clearForm();
+            setMessage({message: "Success!"});
         } else {
-            console.log(error)
-            setError(response);
+            setMessage(response);
         }
     }
 
     const clearForm = () => {
         setName('');
         setGoal('');
-        setIsPublic(false)
+        setIsPublic(false);
     }
 
 return (
@@ -49,7 +49,7 @@ return (
         <p />
         <button className="btn" type="submit">New Routine</button>
         </form>
-        
+        {message.message && <p>{message.message}</p>}
     </div>
 
 )
