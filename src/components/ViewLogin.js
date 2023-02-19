@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import { loginUser } from "../api/fetch";
 
-export const ViewLogin = ({setToken}) => {
-
+export const ViewLogin = (props) => {
+    const { setUser } = props;
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [message, setMessage] = useState({});
 
 
     return (
@@ -15,9 +16,15 @@ export const ViewLogin = ({setToken}) => {
         
         try {
             ev.preventDefault();
-            const token = await loginUser(username, password);
-            window.localStorage.setItem('token', token.token);
-            console.log('login success');
+            const response = await loginUser(username, password);
+            if(!response.error) {
+                window.localStorage.setItem('token', response.token);
+                setMessage({ message: 'Login successful!'});
+                setUser(response.user);
+            } else {
+                setMessage(response);
+            }
+            
         }
         catch (error){
             console.error(error);
@@ -37,6 +44,7 @@ export const ViewLogin = ({setToken}) => {
             />
             <p />
         <button className="btn" disabled ={!username || !password}>Log In</button> 
+        {message.message && <p>{message.message}</p>}
         {/* Grays out button if there is no input ^^^^ */}
 
     </form>

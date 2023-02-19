@@ -143,11 +143,6 @@ const loginUser = async(username, password) => {
             })
         })
           let result = await response.json();
-          if (result.error) {
-            throw result.error;
-        }
-        const token = result.token;
-        window.localStorage.setItem('token', token);
         return result;
     } catch (error) {
         console.error("Uh oh, trouble logging in user");

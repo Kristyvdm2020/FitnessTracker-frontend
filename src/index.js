@@ -92,7 +92,7 @@ const App = ()=> {
       </header>
       <Routes>
         <Route path='/Register' element={<ViewRegister />} />
-        <Route path='/Login' element={<ViewLogin  />} />
+        <Route path='/Login' element={<ViewLogin  setUser={setUser}/>} />
         <Route path='/newactivity' element={<CreateActivity />} />
         <Route path='/newroutine' element={<CreateRoutine  user={user} myRoutines={myRoutines} setMyRoutines={setMyRoutines} />} />
         <Route path='/activities/:id' element={
